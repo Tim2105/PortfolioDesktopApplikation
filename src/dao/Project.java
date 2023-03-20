@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -36,6 +38,8 @@ public class Project {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "IMAGE")
 	private byte[] image;
 	
@@ -73,7 +77,7 @@ public class Project {
 			fileExtension = filePath.substring(filePath.lastIndexOf(".") + 1);
 		
 		if(fileExtension != "png")
-			throw new IllegalArgumentException("Das Bilder muss einer .png Datei sein.");
+			throw new IllegalArgumentException("Das Bild muss eine .png Datei sein.");
 		
 		try { this.image = Files.readAllBytes(image.toPath()); }
 		catch(IOException e) {

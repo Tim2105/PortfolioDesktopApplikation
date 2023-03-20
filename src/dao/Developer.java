@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -37,11 +38,15 @@ public class Developer {
 	@JoinColumn(name = "DEVELOPER", referencedColumnName = "ID")
 	private List<ContactOpportunity> contactOpportunities;
 	
+	@ManyToMany(mappedBy = "developers", fetch = FetchType.EAGER)
+	private List<Project> projects;
+	
 	public Developer(String firstname, String lastname, String description) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.description = description;
 		this.contactOpportunities = new ArrayList<ContactOpportunity>();
+		this.projects = new ArrayList<Project>();
 	}
 	
 	public void addContactOpportunity(ContactOpportunity contactOpportunity) {
@@ -51,6 +56,15 @@ public class Developer {
 	
 	public void removeContactOpportunity(ContactOpportunity contactOpportunity) {
 		this.contactOpportunities.remove(contactOpportunity);
+	}
+	
+	public void addProject(Project project) {
+		if(!this.projects.contains(project))
+			this.projects.add(project);
+	}
+	
+	public void removeProject(Project project) {
+		this.projects.remove(project);
 	}
 	
 	@Override
@@ -87,6 +101,10 @@ public class Developer {
 	
 	public List<ContactOpportunity> getContactOpportunities() {
 		return this.contactOpportunities;
+	}
+	
+	public List<Project> getProjects() {
+		return this.projects;
 	}
 	
 }
