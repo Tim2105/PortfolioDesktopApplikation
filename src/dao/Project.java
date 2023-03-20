@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,7 +25,7 @@ import javafx.scene.image.Image;
 
 @Entity
 @Table(name = "PROJECT")
-@SequenceGenerator(name="GEN_PROJECT_ID", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name="GEN_PROJECT_ID", initialValue = 0, allocationSize = 1)
 public class Project {
 	
 	@Id
@@ -49,7 +50,7 @@ public class Project {
 	@Column(name = "DEMO")
 	private String demoURL;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(
 			name = "PROJECT_DEVELOPER",
 			joinColumns = { @JoinColumn(name = "PROJECT", referencedColumnName = "ID") },
@@ -58,33 +59,50 @@ public class Project {
 	private List<Developer> developers;
 	
 	public Project(String title, String description, File image, String sourceURL, String demoURL) throws IOException, RuntimeException, IllegalArgumentException {
+		if(title == null)
+			throw new IllegalArgumentException("Der Titel darf nicht null sein.");
+		
+		if(description == null)
+			throw new IllegalArgumentException("Die Beschreibung darf nicht null sein.");
+		
 		this.title = title;
 		this.description = description;
 		this.sourceURL = sourceURL;
 		this.demoURL = demoURL;
 		this.developers = new ArrayList<Developer>();
 		
-		if(!image.canRead())
-			throw new IOException("Für diese Datei besitzt das Programm keine Leseberechtigungen.");
 		
-		if(!image.isFile())
-			throw new IllegalArgumentException("Der angegebene Pfad führt zu keiner Datei.");
-		
-		String fileExtension = "";
-		String filePath = image.getAbsolutePath();
-		
-		if(filePath.contains("."))
-			fileExtension = filePath.substring(filePath.lastIndexOf(".") + 1);
-		
-		if(fileExtension != "png")
-			throw new IllegalArgumentException("Das Bild muss eine .png Datei sein.");
-		
-		try { this.image = Files.readAllBytes(image.toPath()); }
-		catch(IOException e) {
-			throw new IOException("Beim Lesen der Datei ist ein Fehler aufgetreten. Stellen Sie sicher, dass die Datei noch existiert und Sie Leseberechtigungen besitzen.");
-		} catch(Exception e) {
-			throw new RuntimeException("Beim Lesen der Datei ist ein unbekannter Fehler aufgetreten.");
+		if(image != null ) {
+			if(!image.canRead())
+				throw new IOException("Für diese Datei besitzt das Programm keine Leseberechtigungen.");
+			
+			if(!image.isFile())
+				throw new IllegalArgumentException("Der angegebene Pfad führt zu keiner Datei.");
+			
+			String fileExtension = "";
+			String filePath = image.getAbsolutePath();
+			
+			if(filePath.contains("."))
+				fileExtension = filePath.substring(filePath.lastIndexOf(".") + 1);
+			
+			if(!(fileExtension.equals("png") ||
+					fileExtension.equals("jpeg") ||
+					fileExtension.equals("jpg")))
+				throw new IllegalArgumentException("Das Bild muss eine .png- oder eine .jpeg/.jpg-Datei sein.");
+			
+			try { this.image = Files.readAllBytes(image.toPath()); }
+			catch(IOException e) {
+				throw new IOException("Beim Lesen der Datei ist ein Fehler aufgetreten. Stellen Sie sicher, dass die Datei noch existiert und Sie Leseberechtigungen besitzen.");
+			} catch(Exception e) {
+				throw new RuntimeException("Beim Lesen der Datei ist ein unbekannter Fehler aufgetreten.");
+			}
+		} else {
+			this.image = null;
 		}
+	}
+	
+	public Project() {
+		this.developers = new ArrayList<Developer>();
 	}
 	
 	public Image getImage() {
@@ -92,8 +110,8 @@ public class Project {
 	}
 	
 	public void addDeveloper(Developer developer) {
-		if(!this.developers.contains(developer))
-			this.developers.add(developer);
+		this.developers.add(developer);
+		developer.getProjects().add(this);
 	}
 	
 	public void removeDeveloper(Developer developer) {
@@ -138,6 +156,10 @@ public class Project {
 	
 	public void setDemoURL(String demoURL) {
 		this.demoURL = demoURL;
+	}
+	
+	public List<Developer> getDevelopers() {
+		return this.developers;
 	}
 
 }

@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,7 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "DEVELOPER")
-@SequenceGenerator(name="GEN_DEVELOPER_ID", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name="GEN_DEVELOPER_ID", initialValue = 0, allocationSize = 1)
 public class Developer {
 
 	@Id
@@ -34,14 +35,22 @@ public class Developer {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "DEVELOPER", referencedColumnName = "ID")
+	@OneToMany(mappedBy = "developer", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<ContactOpportunity> contactOpportunities;
 	
-	@ManyToMany(mappedBy = "developers", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "developers", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Project> projects;
 	
 	public Developer(String firstname, String lastname, String description) {
+		if(firstname == null)
+			throw new IllegalArgumentException("Der Vorname darf nicht null sein.");
+		
+		if(lastname == null)
+			throw new IllegalArgumentException("Der Nachname darf nicht null sein.");
+		
+		if(description == null)
+			throw new IllegalArgumentException("Die Beschreibung darf nicht null sein.");
+		
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.description = description;
@@ -49,18 +58,24 @@ public class Developer {
 		this.projects = new ArrayList<Project>();
 	}
 	
+	public Developer() {
+		this.contactOpportunities = new ArrayList<ContactOpportunity>();
+		this.projects = new ArrayList<Project>();
+	}
+	
 	public void addContactOpportunity(ContactOpportunity contactOpportunity) {
-		if(!this.contactOpportunities.contains(contactOpportunity))
-			this.contactOpportunities.add(contactOpportunity);
+		this.contactOpportunities.add(contactOpportunity);
+		contactOpportunity.setDeveloper(this);
 	}
 	
 	public void removeContactOpportunity(ContactOpportunity contactOpportunity) {
-		this.contactOpportunities.remove(contactOpportunity);
+		if(this.contactOpportunities.remove(contactOpportunity))
+			contactOpportunity.setDeveloper(null);
 	}
 	
 	public void addProject(Project project) {
-		if(!this.projects.contains(project))
-			this.projects.add(project);
+		this.projects.add(project);
+		project.getDevelopers().add(this);
 	}
 	
 	public void removeProject(Project project) {
