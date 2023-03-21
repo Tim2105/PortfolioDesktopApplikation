@@ -1,4 +1,4 @@
-package dao;
+package entity;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package dao;
+package entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
