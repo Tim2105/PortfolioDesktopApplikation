@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Developer;
+import entity.Project;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import view.EmptyListViewPlaceholder;
 
-public class ProjectEditViewController {
+public class ProjectEditViewController extends EditController<Project> {
 
     @FXML
     private Label imagePreviewLabel;
@@ -75,6 +76,6 @@ public class ProjectEditViewController {
 
     @FXML
     private void handleConfirmButtonAction() {
-    	((Stage)cancelButton.getScene().getWindow()).close();
+    	((Stage)confirmButton.getScene().getWindow()).close();
     }
 }

@@ -30,7 +30,7 @@ public class Main extends Application {
 			Alert alert = new Alert(AlertType.ERROR,
 					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
 					ButtonType.OK);
-			alert.showAndWait();
+			alert.show();
 		}
 	}
 	

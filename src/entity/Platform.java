@@ -3,11 +3,11 @@ package entity;
 public enum Platform {
 
 	Twitter,
-	YouTube,
 	Facebook,
 	LinkedIn,
 	Github,
 	Email,
+	Phone,
 	Other;
 	
 	@Override

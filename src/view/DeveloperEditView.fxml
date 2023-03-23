@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:id="root" alignment="CENTER" hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="439.0" minWidth="715.0" vgap="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeveloperEditViewController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" prefWidth="200.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" prefWidth="200.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="70.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="40.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+      <Label text="Vorname*" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+      <Label text="Nachname*" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+      <Label text="Beschreibung*" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+      <Label text="Kontakt" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+      <Label text="Projekte" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+      <TextField fx:id="firstNameTextField" promptText="Vorname" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+      <TextField fx:id="lastNameTextField" promptText="Nachname" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Hier könnte ihr Lebenslauf stehen" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets bottom="10.0" right="10.0" top="8.0" />
+         </GridPane.margin>
+      </TextArea>
+      <ListView fx:id="contactListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </ListView>
+      <ListView fx:id="projectListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="4" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </ListView>
+      <Button fx:id="cancelButton" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Abbrechen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="confirmButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Bestätigen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
+      </Button>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="addContactButton" mnemonicParsing="false" onAction="#handleAddContactButtonAction" text="Hinzufügen">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="editContactButton" mnemonicParsing="false" onAction="#handleEditContactButtonAction" text="Bearbeiten">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="removeContactButton" mnemonicParsing="false" onAction="#handleRemoveContactButtonAction" text="Entfernen">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="addProjectButton" mnemonicParsing="false" onAction="#handleAddProjectButtonAction" text="Hinzufügen">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="removeProjectButton" mnemonicParsing="false" onAction="#handleRemoveProjectButtonAction" text="Entfernen">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</GridPane>

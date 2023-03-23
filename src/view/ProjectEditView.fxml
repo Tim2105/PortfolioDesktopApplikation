@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" hgap="20.0" vgap="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectEditViewController">
+<GridPane fx:id="root" alignment="CENTER" hgap="20.0" vgap="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectEditViewController">
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
@@ -32,12 +32,12 @@
       <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="256.0" />
    </columnConstraints>
    <children>
-      <Label text="Titel*" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+      <Label text="Titel*" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
       <TextField fx:id="titleTextField" prefHeight="26.0" prefWidth="74.0" promptText="Projekttitel" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-      <Label text="Beschreibung*" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-      <Label text="Bild" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
-      <Label text="Link zu Quelle" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
-      <Label text="Link zu Demo" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+      <Label text="Beschreibung*" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+      <Label text="Bild" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+      <Label text="Link zu Quelle" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+      <Label text="Link zu Demo" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
       <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
       <TextField fx:id="downloadTextField" promptText="Link zum Download" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
       <TextField fx:id="demoTextField" promptText="Link zu Demonstration" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
@@ -45,9 +45,9 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label text="Entwickler" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzfügen" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="removeDeveloperButton" mnemonicParsing="false" onAction="#handleRemoveDeveloperButtonAction" text="Entwickler entfernen" GridPane.hgrow="ALWAYS" GridPane.rowIndex="9" GridPane.vgrow="ALWAYS" />
+      <Label text="Entwickler" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
+      <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzfügen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
+      <Button fx:id="removeDeveloperButton" mnemonicParsing="false" onAction="#handleRemoveDeveloperButtonAction" text="Entwickler entfernen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="9" GridPane.vgrow="ALWAYS" />
       <ListView fx:id="developerListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS" />
       <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Abbrechen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
       <Button fx:id="confirmButton" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Bestätigen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />

@@ -1,5 +1,6 @@
 package controller;
 
+import entity.Developer;
 import entity.Project;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +13,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.EmptyListViewPlaceholder;
 
-public class ProjectViewController {
-    
+public class ProjectViewController extends Controller {
+	
     @FXML
     private MenuItem newProjectMenuItem;
     
@@ -71,6 +73,8 @@ public class ProjectViewController {
 			Scene scene = new Scene(root);
 			
 			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(root.getScene().getWindow());
 			stage.setScene(scene);
 			
 			String stageTitle = "Projekt bearbeiten - ";
@@ -81,14 +85,42 @@ public class ProjectViewController {
 				stageTitle += "Neues Projekt";
 			
 			stage.setTitle(stageTitle);
-			
-			stage.showAndWait();
+			stage.show();
     	} catch(Exception e) {
     		e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR,
 					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
 					ButtonType.OK);
-			alert.showAndWait();
+			alert.show();
+    	}
+    }
+    
+    private void openDeveloperEditView(Developer developer) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DeveloperEditView.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(root.getScene().getWindow());
+			stage.setScene(scene);
+			
+			String stageTitle = "Entwickler bearbeiten - ";
+			
+			if(developer != null)
+				stageTitle += developer.getFirstname() + " " + developer.getLastname();
+			else
+				stageTitle += "Neuer Entwickler";
+			
+			stage.setTitle(stageTitle);
+			stage.show();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR,
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
+					ButtonType.OK);
+			alert.show();
     	}
     }
     
@@ -99,7 +131,7 @@ public class ProjectViewController {
     
     @FXML
     private void handleNewDeveloperMenuItemAction() {
-        // implementation code here
+    	this.openDeveloperEditView(null);
     }
     
     @FXML
@@ -149,7 +181,27 @@ public class ProjectViewController {
     
     @FXML
     private void handleShowDeveloperButtonAction() {
-        // implementation code here
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DeveloperView.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(root.getScene().getWindow());
+			stage.setScene(scene);
+			
+			String stageTitle = "Entwickler verwalten";
+			
+			stage.setTitle(stageTitle);
+			stage.show();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR,
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
+					ButtonType.OK);
+			alert.show();
+    	}
     }
     
 }
