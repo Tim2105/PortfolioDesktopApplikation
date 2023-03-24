@@ -46,7 +46,7 @@
             <Font size="18.0" />
          </font></Label>
       <Label text="Entwickler" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzfügen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
+      <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzufügen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
       <Button fx:id="removeDeveloperButton" mnemonicParsing="false" onAction="#handleRemoveDeveloperButtonAction" text="Entwickler entfernen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="9" GridPane.vgrow="ALWAYS" />
       <ListView fx:id="developerListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS" />
       <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Abbrechen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />

@@ -71,11 +71,11 @@ public class ProjectEditViewController extends EditController<Project> {
 
     @FXML
     private void handleCancelButtonAction() {
-    	((Stage)cancelButton.getScene().getWindow()).close();
+    	this.close();
     }
 
     @FXML
     private void handleConfirmButtonAction() {
-    	((Stage)confirmButton.getScene().getWindow()).close();
+    	this.close();
     }
 }
