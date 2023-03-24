@@ -6,10 +6,13 @@ public abstract class EditController<T> extends Controller {
 	
 	public void setEntity(T entity) {
 		this.entity = entity;
+		this.update();
 	}
 	
 	public T getEntity() {
 		return this.entity;
 	}
+	
+	protected abstract void update();
 	
 }

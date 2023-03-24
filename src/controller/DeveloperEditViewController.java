@@ -143,4 +143,9 @@ public class DeveloperEditViewController extends EditController<Developer> {
     private void handleRemoveProjectButtonAction() {
     	
     }
+
+	@Override
+	protected void update() {
+		
+	}
 }

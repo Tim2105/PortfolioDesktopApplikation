@@ -6,7 +6,6 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,32 +22,32 @@ public class Developer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator = "GEN_DEVELOPER_ID")
 	@Column(name = "ID")
-	private int id;
+	public Integer id;
 	
 	@Column(name = "FIRSTNAME")
-	private String firstname;
+	public String firstname;
 	
 	@Column(name = "LASTNAME")
-	private String lastname;
+	public String lastname;
 	
 	@Column(name = "DESCRIPTION")
-	private String description;
+	public String description;
 	
-	@OneToMany(mappedBy = "developer", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<ContactOpportunity> contactOpportunities;
+	@OneToMany(mappedBy = "developer", cascade = CascadeType.ALL)
+	public List<ContactOpportunity> contactOpportunities;
 	
-	@ManyToMany(mappedBy = "developers", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Project> projects;
+	@ManyToMany(mappedBy = "developers")
+	public List<Project> projects;
 	
 	public Developer(String firstname, String lastname, String description) {
-		if(firstname == null)
-			throw new IllegalArgumentException("Der Vorname darf nicht null sein.");
+		if(firstname == null || firstname.isBlank())
+			throw new IllegalArgumentException("Der Vorname darf nicht leer sein.");
 		
-		if(lastname == null)
-			throw new IllegalArgumentException("Der Nachname darf nicht null sein.");
+		if(lastname == null || lastname.isBlank())
+			throw new IllegalArgumentException("Der Nachname darf nicht leer sein.");
 		
-		if(description == null)
-			throw new IllegalArgumentException("Die Beschreibung darf nicht null sein.");
+		if(description == null || description.isBlank())
+			throw new IllegalArgumentException("Die Beschreibung darf nicht leer sein.");
 		
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -60,6 +59,25 @@ public class Developer {
 	public Developer() {
 		this.contactOpportunities = new ArrayList<ContactOpportunity>();
 		this.projects = new ArrayList<Project>();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj)
+			return true;
+		
+		if(obj == null)
+			return false;
+		
+		if(!(obj instanceof Developer))
+			return false;
+		
+		Developer other = (Developer)obj;
+		
+		if(this.id == null)
+			return false;
+		
+		return this.id.equals(other.id);
 	}
 	
 	public void addContactOpportunity(ContactOpportunity contactOpportunity) {
@@ -79,14 +97,6 @@ public class Developer {
 	
 	public void removeProject(Project project) {
 		this.projects.remove(project);
-	}
-	
-	@Override
-	public boolean equals(Object other) {
-		if(!(other instanceof Developer))
-			return false;
-		
-		return ((Developer)other).id == this.id;
 	}
 	
 	public String getFirstname() {

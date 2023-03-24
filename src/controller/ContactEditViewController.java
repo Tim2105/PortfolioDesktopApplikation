@@ -35,4 +35,9 @@ public class ContactEditViewController extends EditController<ContactOpportunity
     private void handleConfirmButtonAction() {
     	this.close();
     }
+
+	@Override
+	protected void update() {
+		
+	}
 }

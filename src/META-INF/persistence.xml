@@ -4,9 +4,9 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
              version="3.1">
 	<persistence-unit name="Database">
-		<class>dao.ContactOpportunity</class>
-		<class>dao.Developer</class>
-		<class>dao.Project</class>
+		<class>entity.ContactOpportunity</class>
+		<class>entity.Developer</class>
+		<class>entity.Project</class>
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver" value="org.firebirdsql.jdbc.FBDriver"/>
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:firebirdsql://localhost:3050/C:/Users/timpl/Desktop/Informatikstudium/Sommersemester 2023/Projekt/Datenbank/DATABASE.FDB"/>

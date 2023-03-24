@@ -3,7 +3,6 @@ package entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,17 +19,17 @@ public class ContactOpportunity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator = "GEN_CONTACT_OPPORTUNITY_ID")
 	@Column(name = "ID")
-	private int id;
+	public Integer id;
 	
 	@Column(name = "PLATFORM")
-	private Platform platform;
+	public Platform platform;
 	
 	@Column(name = "URL")
-	private String url;
+	public String url;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.PERSIST)
+	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "DEVELOPER")
-	private Developer developer;
+	public Developer developer;
 	
 	public ContactOpportunity(Platform platform, String url) {
 		this.platform = platform;
@@ -42,11 +41,22 @@ public class ContactOpportunity {
 	}
 	
 	@Override
-	public boolean equals(Object other) {
-		if(!(other instanceof ContactOpportunity))
+	public boolean equals(Object obj) {
+		if(this == obj)
+			return true;
+		
+		if(obj == null)
 			return false;
 		
-		return ((ContactOpportunity)other).id == this.id;
+		if(!(obj instanceof ContactOpportunity))
+			return false;
+		
+		ContactOpportunity other = (ContactOpportunity)obj;
+		
+		if(this.id == null)
+			return false;
+		
+		return this.id.equals(other.id);
 	}
 	
 	public Platform getPlatform() {

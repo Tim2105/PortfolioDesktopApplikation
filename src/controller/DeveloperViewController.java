@@ -13,6 +13,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.DBInterface;
+import view.DetailedDeveloperListCell;
 import view.EmptyListViewPlaceholder;
 
 public class DeveloperViewController extends Controller {
@@ -41,6 +43,10 @@ public class DeveloperViewController extends Controller {
     	
     	this.developerListView.getSelectionModel()
     			.selectionModeProperty().set(SelectionMode.SINGLE);
+    	
+    	this.developerListView.setCellFactory(val -> new DetailedDeveloperListCell());
+    	
+    	this.developerListView.setItems(DBInterface.getInstance().getDevelopers());
     }
     
     private void openDeveloperEditView(Developer developer) {

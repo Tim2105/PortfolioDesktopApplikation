@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,46 +30,45 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator = "GEN_PROJECT_ID")
 	@Column(name = "ID")
-	private int id;
+	public Integer id;
 	
 	@Column(name = "TITLE")
-	private String title;
+	public String title;
 	
 	@Column(name = "DESCRIPTION")
-	private String description;
+	public String description;
 	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "IMAGE")
-	private byte[] image;
+	public byte[] image;
 	
 	@Column(name = "SOURCE")
-	private String sourceURL;
+	public String sourceURL;
 	
 	@Column(name = "DEMO")
-	private String demoURL;
+	public String demoURL;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany
 	@JoinTable(
 			name = "PROJECT_DEVELOPER",
 			joinColumns = { @JoinColumn(name = "PROJECT", referencedColumnName = "ID") },
 			inverseJoinColumns = { @JoinColumn(name = "DEVELOPER", referencedColumnName = "ID") }
 	)
-	private List<Developer> developers;
+	public List<Developer> developers;
 	
 	public Project(String title, String description, File image, String sourceURL, String demoURL) throws IOException, RuntimeException, IllegalArgumentException {
-		if(title == null)
-			throw new IllegalArgumentException("Der Titel darf nicht null sein.");
+		if(title == null || title.isBlank())
+			throw new IllegalArgumentException("Der Titel darf nicht leer sein.");
 		
-		if(description == null)
-			throw new IllegalArgumentException("Die Beschreibung darf nicht null sein.");
+		if(description == null || description.isBlank())
+			throw new IllegalArgumentException("Die Beschreibung darf nicht leer sein.");
 		
 		this.title = title;
 		this.description = description;
 		this.sourceURL = sourceURL;
 		this.demoURL = demoURL;
 		this.developers = new ArrayList<Developer>();
-		
 		
 		if(image != null ) {
 			if(!image.canRead())
@@ -105,8 +103,30 @@ public class Project {
 		this.developers = new ArrayList<Developer>();
 	}
 	
-	public Image getImage() {
-		return new Image(new ByteArrayInputStream(this.image));
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj)
+			return true;
+		
+		if(obj == null)
+			return false;
+		
+		if(!(obj instanceof Project))
+			return false;
+		
+		Project other = (Project)obj;
+		
+		if(this.id == null)
+			return false;
+		
+		return this.id.equals(other.id);
+	}
+	
+	public Image getImage(double width, double height) {
+		if(this.image == null)
+			return null;
+		
+		return new Image(new ByteArrayInputStream(this.image), width, height, true, true);
 	}
 	
 	public void addDeveloper(Developer developer) {
@@ -116,14 +136,12 @@ public class Project {
 	
 	public void removeDeveloper(Developer developer) {
 		this.developers.remove(developer);
+		developer.getProjects().remove(this);
 	}
 	
-	@Override
-	public boolean equals(Object other) {
-		if(!(other instanceof Project))
-			return false;
-		
-		return ((Project)other).id == this.id;
+	public void removeAllDevelopers() {
+		for(Developer d : new ArrayList<Developer>(this.developers))
+			this.removeDeveloper(d);
 	}
 	
 	public String getTitle() {
@@ -140,6 +158,10 @@ public class Project {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setImage(byte[] data) {
+		this.image = data;
 	}
 	
 	public String getSourceURL() {

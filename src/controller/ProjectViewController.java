@@ -1,7 +1,10 @@
 package controller;
 
+import java.util.Optional;
+
 import entity.Developer;
 import entity.Project;
+import jakarta.persistence.EntityManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +18,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.DBInterface;
+import view.DetailedProjectListCell;
 import view.EmptyListViewPlaceholder;
 
 public class ProjectViewController extends Controller {
@@ -64,12 +69,19 @@ public class ProjectViewController extends Controller {
     	
     	this.projectsListView.getSelectionModel()
     			.selectionModeProperty().set(SelectionMode.SINGLE);
+    	
+    	this.projectsListView.setCellFactory(val -> new DetailedProjectListCell());
+    	
+    	this.projectsListView.setItems(DBInterface.getInstance().getProjects());
     }
     
     private void openProjectEditView(Project project) {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProjectEditView.fxml"));
 			Parent root = loader.load();
+			EditController<Project> controller = loader.getController();
+			controller.setEntity(project);
+			
 			Scene scene = new Scene(root);
 			
 			Stage stage = new Stage();
@@ -141,7 +153,8 @@ public class ProjectViewController extends Controller {
     
     @FXML
     private void handleRefreshMenuItemAction() {
-        // implementation code here
+    	DBInterface.getInstance().refresh();
+    	this.projectsListView.refresh();
     }
     
     @FXML
@@ -176,7 +189,43 @@ public class ProjectViewController extends Controller {
     
     @FXML
     private void handleDeleteProjectButtonAction() {
-        // implementation code here
+    	Project selectedProject = this.projectsListView
+				.getSelectionModel().getSelectedItem();
+
+		if(selectedProject != null) {
+			
+			Alert warningDialog = new Alert(AlertType.WARNING,
+					"Möchten Sie das Projekt wirklich löschen?\nDiese Aktion ist permanent!",
+					ButtonType.NO, ButtonType.YES);
+			Optional<ButtonType> result = warningDialog.showAndWait();
+			
+			if(result.isPresent() && result.get().equals(ButtonType.YES)) {
+				try {
+					EntityManager em = DBInterface.getInstance().createEntityManager();
+					
+					Project p = em.find(Project.class, selectedProject.id);
+					
+					em.getTransaction().begin();
+					em.remove(p);
+					em.getTransaction().commit();
+					em.close();
+					
+					DBInterface.getInstance().getProjects().remove(selectedProject);
+				} catch(Exception e) {
+					e.printStackTrace();
+					
+					Alert alert = new Alert(AlertType.ERROR,
+							"Das Löschen des Projektes ist fehlgeschlagen",
+							ButtonType.OK);
+						alert.showAndWait();
+				}
+			}
+		} else {
+			Alert alert = new Alert(AlertType.ERROR,
+				"Wählen Sie ein Projekt aus der Liste aus",
+				ButtonType.OK);
+			alert.showAndWait();
+		}
     }
     
     @FXML
