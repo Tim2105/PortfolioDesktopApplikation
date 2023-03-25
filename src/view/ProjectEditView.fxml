@@ -41,7 +41,7 @@
       <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
       <TextField fx:id="downloadTextField" promptText="Link zum Download" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
       <TextField fx:id="demoTextField" promptText="Link zu Demonstration" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
-      <Label fx:id="imagePreviewLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="258.0" maxWidth="532.0" minHeight="-Infinity" minWidth="-Infinity" text="Vorschau des Bildes" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <Label fx:id="imagePreviewLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="258.0" maxWidth="532.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2;" text="Vorschau des Bildes" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <font>
             <Font size="18.0" />
          </font>

@@ -32,6 +32,12 @@ public class ContactOpportunity {
 	public Developer developer;
 	
 	public ContactOpportunity(Platform platform, String url) {
+		if(platform == null)
+			throw new IllegalArgumentException("Die Plattform darf nicht leer sein");
+		
+		if(url == null || url.isBlank())
+			throw new IllegalArgumentException("Die URL darf nicht leer sein");
+		
 		this.platform = platform;
 		this.url = url;
 	}

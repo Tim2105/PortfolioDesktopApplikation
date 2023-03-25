@@ -97,6 +97,12 @@ public class Developer {
 	
 	public void removeProject(Project project) {
 		this.projects.remove(project);
+		project.getDevelopers().remove(this);
+	}
+	
+	public void removeAllProjects() {
+		for(Project p : new ArrayList<Project>(this.projects))
+			this.removeProject(p);
 	}
 	
 	public String getFirstname() {

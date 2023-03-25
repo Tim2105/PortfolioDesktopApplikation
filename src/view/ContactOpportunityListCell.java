@@ -1,16 +1,16 @@
 package view;
 
-import entity.Project;
+import entity.ContactOpportunity;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.layout.VBox;
 
-public class DetailedProjectListCell extends ListCell<Project> {
+public class ContactOpportunityListCell extends ListCell<ContactOpportunity> {
 	
 	@Override
-	protected void updateItem(Project item, boolean empty) {
+	protected void updateItem(ContactOpportunity item, boolean empty) {
 		super.updateItem(item, empty);
 		
 		if(item == null || empty)
@@ -18,19 +18,19 @@ public class DetailedProjectListCell extends ListCell<Project> {
 		else {
 			VBox vbox = new VBox();
 			vbox.setAlignment(Pos.CENTER_LEFT);
-			vbox.setSpacing(7.0);
+			vbox.setSpacing(5.0);
 			
-			Label title = new Label(item.getTitle());
+			Label title = new Label(item.getPlatform().toString());
 			title.setWrapText(true);
 			title.prefWidthProperty().bind(this.prefWidthProperty());
 			title.setStyle("-fx-font-weight: bold;");
 			
-			Label description = new Label(item.getDescription());
+			Label description = new Label(item.getURL());
 			description.setStyle("-fx-font-style: italic;");
 			description.prefWidthProperty().bind(this.prefWidthProperty());
 			description.setWrapText(true);
 			description.setTextOverrun(OverrunStyle.ELLIPSIS);
-			description.setMaxHeight(40.0);
+			description.setMaxHeight(30.0);
 			
 			vbox.getChildren().addAll(title, description);
 			this.setGraphic(vbox);

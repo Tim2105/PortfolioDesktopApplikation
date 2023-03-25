@@ -1,19 +1,19 @@
 package view;
 
-import entity.Developer;
+import entity.Project;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 
-public class DeveloperListCell extends ListCell<Developer> {
+public class ProjectListCell extends ListCell<Project> {
 	
 	@Override
-	protected void updateItem(Developer item, boolean empty) {
+	protected void updateItem(Project item, boolean empty) {
 		super.updateItem(item, empty);
 		
 		if(item == null || empty)
 			this.setGraphic(null);
 		else {
-			Label title = new Label(item.getFirstname() + " " + item.getLastname());
+			Label title = new Label(item.getTitle());
 			title.setWrapText(true);
 			title.prefWidthProperty().bind(this.prefWidthProperty());
 			

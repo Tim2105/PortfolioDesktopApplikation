@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.Optional;
+
 import entity.Developer;
+import jakarta.persistence.EntityManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,6 +56,10 @@ public class DeveloperViewController extends Controller {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DeveloperEditView.fxml"));
 			Parent root = loader.load();
+			EditController<Developer> controller = loader.getController();
+			
+			controller.setEntity(developer);
+			
 			Scene scene = new Scene(root);
 			
 			Stage stage = new Stage();
@@ -86,7 +93,7 @@ public class DeveloperViewController extends Controller {
     @FXML
     private void handleChangeDeveloperButtonAction() {
     	Developer selectedDeveloper = this.developerListView
-    									.getSelectionModel().getSelectedItem();
+    				.getSelectionModel().getSelectedItem();
     	
     	if(selectedDeveloper != null)
     		this.openDeveloperEditView(selectedDeveloper);
@@ -100,6 +107,41 @@ public class DeveloperViewController extends Controller {
 
     @FXML
     private void handleDeleteDeveloperButtonAction() {
-        // Implementierung für den "Entwickler entfernen"-Button
+    	Developer selectedDeveloper = this.developerListView
+				.getSelectionModel().getSelectedItem();
+    	
+    	if(selectedDeveloper != null) {
+    		Alert warningDialog = new Alert(AlertType.WARNING,
+					"Möchten Sie den Entwickler wirklich löschen?\nDiese Aktion ist permanent!",
+					ButtonType.NO, ButtonType.YES);
+			Optional<ButtonType> result = warningDialog.showAndWait();
+			
+			if(result.isPresent() && result.get().equals(ButtonType.YES)) {
+				try {
+					EntityManager em = DBInterface.getInstance().createEntityManager();
+					
+					Developer d = em.find(Developer.class, selectedDeveloper.id);
+					
+					em.getTransaction().begin();
+					em.remove(d);
+					em.getTransaction().commit();
+					em.close();
+					
+					DBInterface.getInstance().getDevelopers().remove(selectedDeveloper);
+				} catch(Exception e) {
+					e.printStackTrace();
+					
+					Alert alert = new Alert(AlertType.ERROR,
+							"Das Löschen des Entwicklers ist fehlgeschlagen",
+							ButtonType.OK);
+						alert.showAndWait();
+				}
+			}
+    	} else {
+    		Alert alert = new Alert(AlertType.ERROR,
+    				"Wählen Sie einen Entwickler aus der Liste aus",
+    				ButtonType.OK);
+    			alert.showAndWait();
+    	}
     }
 }

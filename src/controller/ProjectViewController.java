@@ -175,7 +175,7 @@ public class ProjectViewController extends Controller {
     @FXML
     private void handleEditProjectButtonAction() {
     	Project selectedProject = this.projectsListView
-    								.getSelectionModel().getSelectedItem();
+    			.getSelectionModel().getSelectedItem();
     	
     	if(selectedProject != null)
     		this.openProjectEditView(selectedProject);
@@ -193,7 +193,6 @@ public class ProjectViewController extends Controller {
 				.getSelectionModel().getSelectedItem();
 
 		if(selectedProject != null) {
-			
 			Alert warningDialog = new Alert(AlertType.WARNING,
 					"Möchten Sie das Projekt wirklich löschen?\nDiese Aktion ist permanent!",
 					ButtonType.NO, ButtonType.YES);

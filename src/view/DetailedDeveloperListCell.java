@@ -22,12 +22,12 @@ public class DetailedDeveloperListCell extends ListCell<Developer> {
 			
 			Label title = new Label(item.getFirstname() + " " + item.getLastname());
 			title.setWrapText(true);
-			title.prefWidthProperty().bind(this.widthProperty());
+			title.prefWidthProperty().bind(this.prefWidthProperty());
 			title.setStyle("-fx-font-weight: bold;");
 			
 			Label description = new Label(item.getDescription());
 			description.setStyle("-fx-font-style: italic;");
-			description.prefWidthProperty().bind(this.widthProperty());
+			description.prefWidthProperty().bind(this.prefWidthProperty());
 			description.setWrapText(true);
 			description.setTextOverrun(OverrunStyle.ELLIPSIS);
 			description.setMaxHeight(40.0);

@@ -42,7 +42,7 @@ public class DBInterface {
 		this.loadFromDB();
 	}
 	
-	public void loadFromDB() {
+	private void loadFromDB() {
 		TypedQuery<Project> projectQuery = this.em.createQuery("select p from Project p", Project.class);
 		this.projects.clear();
 		this.projects.addAll(projectQuery.getResultList());
@@ -53,11 +53,11 @@ public class DBInterface {
 	}
 	
 	public void refresh() {
-		for(Project p : this.projects)
-			this.em.refresh(p);
+		this.em.close();
 		
-		for(Developer d : this.developers)
-			this.em.refresh(d);
+		this.emf.getCache().evictAll();
+		this.em = this.emf.createEntityManager();
+		this.loadFromDB();
 	}
 	
 	public ObservableList<Project> getProjects() {

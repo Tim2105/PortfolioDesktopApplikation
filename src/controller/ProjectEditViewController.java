@@ -230,6 +230,8 @@ public class ProjectEditViewController extends EditController<Project> {
     			DBInterface.getInstance().getProjects().remove(index);
     			DBInterface.getInstance().getProjects().add(index, this.entity);
 	    	}
+	    	
+	    	this.close();
     	} catch(Exception e) {
     		e.printStackTrace();
     		
@@ -238,8 +240,6 @@ public class ProjectEditViewController extends EditController<Project> {
 					ButtonType.OK);
 			alert.show();
 		}
-    	
-    	this.close();
     }
 
 	@Override
