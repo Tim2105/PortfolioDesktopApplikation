@@ -18,6 +18,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.DBConnectionData;
 import model.DBInterface;
 import view.DetailedProjectListCell;
 import view.EmptyListViewPlaceholder;
@@ -150,7 +151,33 @@ public class ProjectViewController extends Controller {
     
     @FXML
     private void handleNewConnectionMenuItemAction() {
-        // implementation code here
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DBConnectionView.fxml"));
+			Parent root = loader.load();
+			
+			EditController<DBConnectionData> controller = loader.getController();
+			controller.setEntity(DBInterface.getInstance().getConnectionData());
+			
+			Scene scene = new Scene(root);
+			
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(root.getScene().getWindow());
+			stage.setScene(scene);
+			
+			String stageTitle = "Neue Verbindung";
+			
+			stage.setTitle(stageTitle);
+			stage.showAndWait();
+			
+			this.projectsListView.setItems(DBInterface.getInstance().getProjects());
+    	} catch(Exception e) {
+    		e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR,
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
+					ButtonType.OK);
+			alert.show();
+    	}
     }
     
     @FXML
