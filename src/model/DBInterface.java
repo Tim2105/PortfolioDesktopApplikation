@@ -60,6 +60,11 @@ public class DBInterface {
 		this.loadFromDB();
 	}
 	
+	public void refresh(Object entity) {
+		if(entity != null)
+			this.em.refresh(entity);
+	}
+	
 	public ObservableList<Project> getProjects() {
 		return this.projects;
 	}

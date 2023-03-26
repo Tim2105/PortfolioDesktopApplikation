@@ -167,8 +167,8 @@ public class DeveloperEditViewController extends EditController<Developer> {
     			this.entity.setLastname(this.lastNameTextField.getText());
     			this.entity.setDescription(this.descriptionTextArea.getText());
     			
-    			for(ContactOpportunity c : this.entity.getContactOpportunities())
-    				this.entity.removeContactOpportunity(c);
+    			List<ContactOpportunity> oldContacts = new ArrayList<ContactOpportunity>(this.entity.getContactOpportunities());
+    			this.entity.removeAllContactOpportunites();
     			
     			for(ContactOpportunity c : this.contactListView.getItems())
     				this.entity.addContactOpportunity(c);
@@ -181,14 +181,18 @@ public class DeveloperEditViewController extends EditController<Developer> {
     			
     			EntityManager em = DBInterface.getInstance().createEntityManager();
     			
-    			for(Project p : DBInterface.getInstance().getProjects())
-    				em.merge(p);
-    			
-    			for(Developer d : DBInterface.getInstance().getDevelopers())
-    				em.merge(d);
-    			
 	    		em.getTransaction().begin();
 	    		em.merge(this.entity);
+	    		
+	    		for(ContactOpportunity c : oldContacts) {
+	    			c = em.merge(c);
+	    			
+	    			if(!this.entity.getContactOpportunities().contains(c))
+	    				em.remove(c);
+	    		}
+	    		
+	    		for(ContactOpportunity c : this.entity.getContactOpportunities())
+	    			em.merge(c);
 	    		
 	    		// Die Klasse Project ist der Besitzer der n-m-Beziehung.
 	    		// Deshalb müssen alle Änderungen in der Assoziationstabelle über Projekte passieren
@@ -203,11 +207,6 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    		
     			em.getTransaction().commit();
     			em.close();
-    			
-    			// Unschöner Trick, um nur das veränderte Element neu zu zeichnen
-    			int index = DBInterface.getInstance().getDevelopers().indexOf(this.entity);
-    			DBInterface.getInstance().getDevelopers().remove(index);
-    			DBInterface.getInstance().getDevelopers().add(index, this.entity);
     		}
     		
     		this.close();
@@ -319,16 +318,16 @@ public class DeveloperEditViewController extends EditController<Developer> {
 		this.lastNameTextField.setText(this.entity.getLastname());
 		this.descriptionTextArea.setText(this.entity.getDescription());
 		
-		List<ContactOpportunity> contactCopies = new ArrayList<ContactOpportunity>();
+//		List<ContactOpportunity> contactCopies = new ArrayList<ContactOpportunity>();
+//		
+//		for(ContactOpportunity c : this.entity.getContactOpportunities()) {
+//			ContactOpportunity copy = new ContactOpportunity(c.getPlatform(), c.getURL());
+//			copy.id = c.id;
+//			
+//			contactCopies.add(copy);
+//		}
 		
-		for(ContactOpportunity c : this.entity.getContactOpportunities()) {
-			ContactOpportunity copy = new ContactOpportunity(c.getPlatform(), c.getURL());
-			copy.id = c.id;
-			
-			contactCopies.add(copy);
-		}
-		
-		this.contactListView.getItems().addAll(contactCopies);
+		this.contactListView.getItems().addAll(this.entity.getContactOpportunities());
 		
 		this.projectListView.getItems().addAll(this.entity.getProjects());
 	}

@@ -33,7 +33,7 @@ public class Developer {
 	@Column(name = "DESCRIPTION")
 	public String description;
 	
-	@OneToMany(mappedBy = "developer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<ContactOpportunity> contactOpportunities;
 	
 	@ManyToMany(mappedBy = "developers")
@@ -86,8 +86,12 @@ public class Developer {
 	}
 	
 	public void removeContactOpportunity(ContactOpportunity contactOpportunity) {
-		if(this.contactOpportunities.remove(contactOpportunity))
-			contactOpportunity.setDeveloper(null);
+		this.contactOpportunities.remove(contactOpportunity);
+	}
+	
+	public void removeAllContactOpportunites() {
+		for(ContactOpportunity c : new ArrayList<ContactOpportunity>(this.contactOpportunities))
+			this.removeContactOpportunity(c);
 	}
 	
 	public void addProject(Project project) {

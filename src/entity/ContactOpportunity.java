@@ -1,6 +1,5 @@
 package entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +26,7 @@ public class ContactOpportunity {
 	@Column(name = "URL")
 	public String url;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "DEVELOPER")
 	public Developer developer;
 	
@@ -40,6 +39,15 @@ public class ContactOpportunity {
 		
 		this.platform = platform;
 		this.url = url;
+		
+		this.formatMailAndPhoneURL();
+	}
+	
+	private void formatMailAndPhoneURL() {
+		if(platform == Platform.Email && !this.url.startsWith("mailto:"))
+			this.url = "mailto:" + this.url;
+		else if(platform == Platform.Phone && !this.url.startsWith("Tel: "))
+			this.url = "Tel: " + this.url;
 	}
 	
 	public ContactOpportunity() {
@@ -71,6 +79,8 @@ public class ContactOpportunity {
 	
 	public void setPlatform(Platform platform) {
 		this.platform = platform;
+		
+		this.formatMailAndPhoneURL();
 	}
 	
 	public String getURL() {
@@ -79,6 +89,8 @@ public class ContactOpportunity {
 	
 	public void setURL(String url) {
 		this.url = url;
+		
+		this.formatMailAndPhoneURL();
 	}
 	
 	public Developer getDeveloper() {

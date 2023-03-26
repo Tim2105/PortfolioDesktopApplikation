@@ -15,7 +15,7 @@ public class DeveloperListCell extends ListCell<Developer> {
 		else {
 			Label title = new Label(item.getFirstname() + " " + item.getLastname());
 			title.setWrapText(true);
-			title.prefWidthProperty().bind(this.prefWidthProperty());
+			title.prefWidthProperty().bind(this.widthProperty().subtract(15.0));
 			
 			this.setGraphic(title);
 		}

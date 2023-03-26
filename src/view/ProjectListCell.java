@@ -15,7 +15,7 @@ public class ProjectListCell extends ListCell<Project> {
 		else {
 			Label title = new Label(item.getTitle());
 			title.setWrapText(true);
-			title.prefWidthProperty().bind(this.prefWidthProperty());
+			title.prefWidthProperty().bind(this.widthProperty().subtract(15.0));
 			
 			this.setGraphic(title);
 		}

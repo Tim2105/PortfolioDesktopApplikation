@@ -97,7 +97,9 @@ public class ProjectViewController extends Controller {
 				stageTitle += "Neues Projekt";
 			
 			stage.setTitle(stageTitle);
-			stage.show();
+			stage.showAndWait();
+			
+			this.projectsListView.refresh();
     	} catch(Exception e) {
     		e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR,

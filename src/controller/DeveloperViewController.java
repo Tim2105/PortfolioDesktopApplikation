@@ -75,7 +75,10 @@ public class DeveloperViewController extends Controller {
 				stageTitle += "Neuer Entwickler";
 			
 			stage.setTitle(stageTitle);
-			stage.show();
+			stage.showAndWait();
+			
+			DBInterface.getInstance().refresh(developer);
+			this.developerListView.refresh();
     	} catch(Exception e) {
     		e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR,
