@@ -32,10 +32,21 @@ public class Main extends Application {
 					connected = true;
 			}
 			catch(Exception e) {
-				Alert errorDialog = new Alert(AlertType.ERROR,
+				Alert dialog;
+				
+				DBConnectionData savedData = DBConnectionData.loadFromResource();
+				
+				if(savedData.getURL() == null || savedData.getUser() == null || savedData.getPassword() == null) {
+					dialog = new Alert(AlertType.INFORMATION,
+							"Bevor wir loslegen können, müssen Sie die URL und Autorisationsdaten der Datenbank eingeben.",
+							ButtonType.CLOSE, ButtonType.NEXT);
+				} else {
+					dialog = new Alert(AlertType.ERROR,
 						"Es konnte keine Datenbankverbindung aufgebaut werden!\nÜberprüfen Sie die URL und Autorisationsdaten.",
 						ButtonType.CLOSE, ButtonType.NEXT);
-				Optional<ButtonType> result = errorDialog.showAndWait();
+				}
+				
+				Optional<ButtonType> result = dialog.showAndWait();
 				
 				if(result.isPresent() && result.get().equals(ButtonType.NEXT)) {
 					try {

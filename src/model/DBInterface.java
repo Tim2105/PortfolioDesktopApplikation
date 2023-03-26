@@ -1,12 +1,5 @@
 package model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +23,8 @@ public class DBInterface {
 		return instance;
 	}
 	
-	public static void reloadConnection(String url, String user, String password) {
-		instance = new DBInterface(url, user, password);
+	public static void reloadConnection(DBConnectionData data) {
+		instance = new DBInterface(data);
 	}
 	
 	private EntityManagerFactory emf;
@@ -43,24 +36,11 @@ public class DBInterface {
 	private ObservableList<Developer> developers;
 	
 	private DBInterface() {
-		String url = null, user = null, password = null;
-		
-		try {
-			Path overridesPath = Paths.get(this.getClass().getResource("/META-INF/overrides.out").toURI());
-			ObjectInputStream in = new ObjectInputStream(Files.newInputStream(overridesPath, StandardOpenOption.READ));
-			
-			url = (String)in.readObject();
-			user = (String)in.readObject();
-			password = (String)in.readObject();
-			
-			in.close();
-		} catch(IOException | URISyntaxException | ClassNotFoundException e) {}
-		
-		this.connect(url, user, password);
+		this(DBConnectionData.loadFromResource());
 	}
 	
-	private DBInterface(String url, String user, String password) {
-		this.connect(url, user, password);
+	private DBInterface(DBConnectionData data) {
+		this.connect(data.getURL(), data.getUser(), data.getPassword());
 	}
 	
 	private void connect(String url, String user, String password) {

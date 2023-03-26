@@ -109,7 +109,6 @@ public class ProjectEditViewController extends EditController<Project> {
 				this.imagePreviewLabel.setGraphic(new ImageView(image));
 				this.imagePreviewLabel.setText(null);
 			} catch (IOException e) {
-				e.printStackTrace();
 				Alert alert = new Alert(AlertType.ERROR,
 						"Beim Lesen der Datei ist ein Fehler aufgetreten:\n" + e.getMessage(),
 						ButtonType.OK);
@@ -232,11 +231,16 @@ public class ProjectEditViewController extends EditController<Project> {
 	    	}
 	    	
 	    	this.close();
+    	} catch(IllegalArgumentException e) {
+    		Alert alert = new Alert(AlertType.ERROR,
+					e.getMessage(),
+					ButtonType.OK);
+			alert.show();
     	} catch(Exception e) {
     		e.printStackTrace();
     		
 			Alert alert = new Alert(AlertType.ERROR,
-					e.getMessage(),
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
 					ButtonType.OK);
 			alert.show();
 		}

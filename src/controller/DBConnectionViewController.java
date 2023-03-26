@@ -1,13 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -47,51 +40,34 @@ public class DBConnectionViewController extends EditController<DBConnectionData>
     		String user = this.userTextField.getText();
     		String password = this.passwordTextField.getText();
     		
-    		DBInterface.reloadConnection(url, user, password);
-    		this.saveOverrides(url, user, password);
+    		DBConnectionData newData = new DBConnectionData(url, user, password);
+    		
+    		DBInterface.reloadConnection(newData);
+    		this.entity = newData;
+    		this.saveOverrides(newData);
     		this.close();
     	} catch(IllegalStateException e) {
     		Alert alert = new Alert(AlertType.ERROR,
-					"Es konnte keine Datenbankverbindung aufgebaut werden!\nÜberprüfen Sie die URL und Autorisationsdaten.",
+					"Es konnte keine Datenbankverbindung aufgebaut werden!\nÜberprüfen Sie die URL und Autorisierungsdaten.",
 					ButtonType.OK);
 			alert.show();
-    	} catch(Exception e) {
+    	} catch(IOException e) {
     		e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR,
-					"Ein unerwarteter Fehler beim Speichern der neuen Autorisationsdaten ist aufgetreten:\n" + e.getMessage(),
+					"Ein unerwarteter Fehler beim Speichern der neuen Autorisierungsdaten ist aufgetreten:\n" + e.getMessage(),
 					ButtonType.OK);
 			alert.show();
     	}
     }
     
-    private void saveOverrides(String url, String user, String password) throws URISyntaxException, IOException {
-    	Path overridesPath = Paths.get(this.getClass().getResource("/META-INF/overrides.out").toURI());
-    	
-    	ObjectOutputStream os = new ObjectOutputStream(Files.newOutputStream(overridesPath, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING));
-    	os.writeObject(url);
-    	os.writeObject(user);
-    	os.writeObject(password);
-    	
-    	os.close();
+    private void saveOverrides(DBConnectionData data) throws IOException {
+    	DBConnectionData.saveToResource(data);
     }
     
     private void loadOverrides() {
-    	String url = null, user = null, password = null;
+    	DBConnectionData data = DBConnectionData.loadFromResource();
     	
-    	try {
-			Path overridesPath = Paths.get(this.getClass().getResource("/META-INF/overrides.out").toURI());
-			ObjectInputStream in = new ObjectInputStream(Files.newInputStream(overridesPath, StandardOpenOption.READ));
-			
-			url = (String)in.readObject();
-			user = (String)in.readObject();
-			password = (String)in.readObject();
-			
-			in.close();
-		} catch(IOException | URISyntaxException | ClassNotFoundException e) {}
-    	
-    	this.urlTextField.setText(this.urlToHostname(url));
-    	this.userTextField.setText(user);
-    	this.passwordTextField.setText(password);
+    	this.setEntity(data);
     }
     
     private String urlToHostname(String url) {
@@ -118,7 +94,11 @@ public class DBConnectionViewController extends EditController<DBConnectionData>
 	@Override
 	protected void update() {
 		if(this.entity != null) {
-			this.urlTextField.setText(this.urlToHostname(this.entity.getURL()));
+			if(this.entity.getURL() != null)
+				this.urlTextField.setText(this.urlToHostname(this.entity.getURL()));
+			else
+				this.urlTextField.setText("localhost:3050");
+			
 			this.userTextField.setText(this.entity.getUser());
 			this.passwordTextField.setText(this.entity.getPassword());
 		} else {

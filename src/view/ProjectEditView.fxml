@@ -11,50 +11,53 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="root" alignment="CENTER" hgap="20.0" minWidth="720.0" vgap="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectEditViewController">
+<GridPane fx:id="root" alignment="CENTER" hgap="20.0" prefWidth="1124.0" vgap="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectEditViewController">
    <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="30.399999999999977" minHeight="10.0" prefHeight="30.399999999999977" />
-      <RowConstraints maxHeight="30.399999999999977" minHeight="10.0" prefHeight="30.399999999999977" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="30.399999999999977" minHeight="10.0" prefHeight="30.399999999999977" vgrow="NEVER" />
+      <RowConstraints maxHeight="30.399999999999977" minHeight="10.0" prefHeight="30.399999999999977" vgrow="NEVER" />
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="156.0" />
-      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="356.0" />
-      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="256.0" />
-      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="256.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="156.0" minWidth="156.0" prefWidth="156.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="156.0" prefWidth="356.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="256.0" minWidth="256.0" prefWidth="256.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="256.0" minWidth="256.0" prefWidth="256.0" />
    </columnConstraints>
    <children>
-      <Label text="Titel*" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-      <TextField fx:id="titleTextField" prefHeight="26.0" prefWidth="74.0" promptText="Projekttitel" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-      <Label text="Beschreibung*" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-      <Label text="Bild" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
-      <Label text="Link zu Quelle" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
-      <Label text="Link zu Demo" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
-      <TextField fx:id="downloadTextField" promptText="Link zum Download" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
-      <TextField fx:id="demoTextField" promptText="Link zu Demonstration" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
-      <Label fx:id="imagePreviewLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="258.0" maxWidth="532.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2;" text="Vorschau des Bildes" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <Label text="Titel*" GridPane.halignment="CENTER" />
+      <TextField fx:id="titleTextField" prefHeight="26.0" prefWidth="74.0" promptText="Projekttitel" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+      <Label text="Beschreibung*" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="3.0" />
+         </GridPane.margin></Label>
+      <Label text="Bild" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Label text="Link zu Quelle" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Label text="Link zu Demo" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+      <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="downloadTextField" promptText="Link zum Download" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="demoTextField" promptText="Link zu Demonstration" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label fx:id="imagePreviewLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="258.0" maxWidth="532.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2;" text="Vorschau des Bildes" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.rowSpan="6" GridPane.valignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
          <GridPane.margin>
             <Insets />
          </GridPane.margin></Label>
-      <Label text="Entwickler" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzufügen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="removeDeveloperButton" mnemonicParsing="false" onAction="#handleRemoveDeveloperButtonAction" text="Entwickler entfernen" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="9" GridPane.vgrow="ALWAYS" />
-      <ListView fx:id="developerListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Abbrechen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Button fx:id="confirmButton" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Bestätigen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <TextArea fx:id="descriptionTextField" prefHeight="200.0" prefWidth="200.0" promptText="Projektbeschreibung" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS" />
+      <Label text="Entwickler" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzufügen" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <Button fx:id="removeDeveloperButton" mnemonicParsing="false" onAction="#handleRemoveDeveloperButtonAction" text="Entwickler entfernen" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <ListView fx:id="developerListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.rowSpan="3" />
+      <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Abbrechen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+      <Button fx:id="confirmButton" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Bestätigen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+      <TextArea fx:id="descriptionTextField" prefHeight="200.0" prefWidth="200.0" promptText="Projektbeschreibung" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="3" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

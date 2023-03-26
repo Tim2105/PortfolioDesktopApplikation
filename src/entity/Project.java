@@ -149,6 +149,9 @@ public class Project {
 	}
 	
 	public void setTitle(String title) {
+		if(title == null || title.isBlank())
+			throw new IllegalArgumentException("Der Titel darf nicht leer sein.");
+		
 		this.title = title;
 	}
 	
@@ -157,6 +160,9 @@ public class Project {
 	}
 	
 	public void setDescription(String description) {
+		if(description == null || description.isBlank())
+			throw new IllegalArgumentException("Die Beschreibung darf nicht leer sein.");
+		
 		this.description = description;
 	}
 	

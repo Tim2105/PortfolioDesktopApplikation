@@ -210,11 +210,16 @@ public class DeveloperEditViewController extends EditController<Developer> {
     		}
     		
     		this.close();
+    	} catch(IllegalArgumentException e) {
+    		Alert alert = new Alert(AlertType.ERROR,
+					e.getMessage(),
+					ButtonType.OK);
+			alert.show();
     	} catch(Exception e) {
     		e.printStackTrace();
     		
 			Alert alert = new Alert(AlertType.ERROR,
-					e.getMessage(),
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
 					ButtonType.OK);
 			alert.show();
     	}

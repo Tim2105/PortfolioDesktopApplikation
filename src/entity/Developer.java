@@ -114,6 +114,9 @@ public class Developer {
 	}
 	
 	public void setFirstname(String firstname) {
+		if(firstname == null || firstname.isBlank())
+			throw new IllegalArgumentException("Der Vorname darf nicht leer sein.");
+		
 		this.firstname = firstname;
 	}
 	
@@ -122,6 +125,9 @@ public class Developer {
 	}
 	
 	public void setLastname(String lastname) {
+		if(lastname == null || lastname.isBlank())
+			throw new IllegalArgumentException("Der Nachname darf nicht leer sein.");
+		
 		this.lastname = lastname;
 	}
 	
@@ -130,6 +136,9 @@ public class Developer {
 	}
 	
 	public void setDescription(String description) {
+		if(description == null || description.isBlank())
+			throw new IllegalArgumentException("Die Beschreibung darf nicht leer sein.");
+		
 		this.description = description;
 	}
 	

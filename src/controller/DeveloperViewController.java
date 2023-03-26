@@ -132,8 +132,6 @@ public class DeveloperViewController extends Controller {
 					
 					DBInterface.getInstance().getDevelopers().remove(selectedDeveloper);
 				} catch(Exception e) {
-					e.printStackTrace();
-					
 					Alert alert = new Alert(AlertType.ERROR,
 							"Das Löschen des Entwicklers ist fehlgeschlagen",
 							ButtonType.OK);

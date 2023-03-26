@@ -240,8 +240,6 @@ public class ProjectViewController extends Controller {
 					
 					DBInterface.getInstance().getProjects().remove(selectedProject);
 				} catch(Exception e) {
-					e.printStackTrace();
-					
 					Alert alert = new Alert(AlertType.ERROR,
 							"Das Löschen des Projektes ist fehlgeschlagen",
 							ButtonType.OK);

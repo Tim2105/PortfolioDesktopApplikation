@@ -78,6 +78,9 @@ public class ContactOpportunity {
 	}
 	
 	public void setPlatform(Platform platform) {
+		if(platform == null)
+			throw new IllegalArgumentException("Die Plattform darf nicht leer sein");
+		
 		this.platform = platform;
 		
 		this.formatMailAndPhoneURL();
@@ -88,6 +91,9 @@ public class ContactOpportunity {
 	}
 	
 	public void setURL(String url) {
+		if(url == null || url.isBlank())
+			throw new IllegalArgumentException("Die URL darf nicht leer sein");
+		
 		this.url = url;
 		
 		this.formatMailAndPhoneURL();

@@ -42,23 +42,27 @@ public class ContactEditViewController extends EditController<ContactOpportunity
 	    				this.platformChoiceBox.getValue(),
 	    				this.urlTextField.getText()
 	    			);
+	    		this.close();
     		} catch(IllegalArgumentException e) {
     			this.entity = null;
-    			e.printStackTrace();
     			Alert alert = new Alert(AlertType.ERROR,
     					e.getMessage(),
     					ButtonType.OK);
     			alert.showAndWait();
     		}
     	} else {
-    		this.entity.setPlatform(this.platformChoiceBox.getValue());
-    		
-    		if(this.urlTextField.getText() != null && !this.urlTextField.getText().isBlank()) {
-    			this.entity.setURL(this.urlTextField.getText());
+    		try {
+	    		this.entity.setPlatform(this.platformChoiceBox.getValue());
+	    		this.entity.setURL(this.urlTextField.getText());
+	    		this.close();
+    		} catch(IllegalArgumentException e) {
+    			this.entity = null;
+    			Alert alert = new Alert(AlertType.ERROR,
+    					e.getMessage(),
+    					ButtonType.OK);
+    			alert.showAndWait();
     		}
     	}
-    	
-    	this.close();
     }
 
 	@Override
