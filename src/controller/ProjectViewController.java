@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
@@ -72,6 +73,41 @@ public class ProjectViewController extends Controller {
     			.selectionModeProperty().set(SelectionMode.SINGLE);
     	
     	this.projectsListView.setCellFactory(val -> new DetailedProjectListCell());
+    	
+    	MenuItem newMenuItem = new MenuItem("Projekt hinzufügen");
+    	newMenuItem.setOnAction(ev -> {
+    		this.openProjectEditView(null);
+    	});
+    	
+    	MenuItem editMenuItem = new MenuItem("Projekt bearbeiten");
+    	editMenuItem.setOnAction(ev -> {
+    		this.openProjectEditView(this.projectsListView.getSelectionModel().getSelectedItem());
+    	});
+    	editMenuItem.setDisable(true);
+    	
+    	MenuItem deleteMenuItem = new MenuItem("Projekt entfernen");
+    	deleteMenuItem.setOnAction(ev -> {
+    		Project selectedProject = this.projectsListView
+    				.getSelectionModel().getSelectedItem();
+
+    		if(selectedProject != null) {
+    			Alert warningDialog = new Alert(AlertType.WARNING,
+    					"Möchten Sie das Projekt wirklich löschen?\nDiese Aktion ist permanent!",
+    					ButtonType.NO, ButtonType.YES);
+    			Optional<ButtonType> result = warningDialog.showAndWait();
+    			
+    			if(result.isPresent() && result.get().equals(ButtonType.YES))
+    				this.deleteProject(selectedProject);
+    		}
+    	});
+    	deleteMenuItem.setDisable(true);
+    	
+    	this.projectsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    		editMenuItem.setDisable(newValue == null);
+    		deleteMenuItem.setDisable(newValue == null);
+    	});
+    	
+    	this.projectsListView.setContextMenu(new ContextMenu(newMenuItem, editMenuItem, deleteMenuItem));
     	
     	this.projectsListView.setItems(DBInterface.getInstance().getProjects());
     }
@@ -232,6 +268,26 @@ public class ProjectViewController extends Controller {
     	}
     }
     
+    private void deleteProject(Project project) {
+    	try {
+			EntityManager em = DBInterface.getInstance().createEntityManager();
+			
+			Project p = em.find(Project.class, project.id);
+			
+			em.getTransaction().begin();
+			em.remove(p);
+			em.getTransaction().commit();
+			em.close();
+			
+			DBInterface.getInstance().getProjects().remove(project);
+		} catch(Exception e) {
+			Alert alert = new Alert(AlertType.ERROR,
+					"Das Löschen des Projektes ist fehlgeschlagen",
+					ButtonType.OK);
+				alert.showAndWait();
+		}
+    }
+    
     @FXML
     private void handleDeleteProjectButtonAction() {
     	Project selectedProject = this.projectsListView
@@ -243,25 +299,8 @@ public class ProjectViewController extends Controller {
 					ButtonType.NO, ButtonType.YES);
 			Optional<ButtonType> result = warningDialog.showAndWait();
 			
-			if(result.isPresent() && result.get().equals(ButtonType.YES)) {
-				try {
-					EntityManager em = DBInterface.getInstance().createEntityManager();
-					
-					Project p = em.find(Project.class, selectedProject.id);
-					
-					em.getTransaction().begin();
-					em.remove(p);
-					em.getTransaction().commit();
-					em.close();
-					
-					DBInterface.getInstance().getProjects().remove(selectedProject);
-				} catch(Exception e) {
-					Alert alert = new Alert(AlertType.ERROR,
-							"Das Löschen des Projektes ist fehlgeschlagen",
-							ButtonType.OK);
-						alert.showAndWait();
-				}
-			}
+			if(result.isPresent() && result.get().equals(ButtonType.YES))
+				this.deleteProject(selectedProject);
 		} else {
 			Alert alert = new Alert(AlertType.ERROR,
 				"Wählen Sie ein Projekt aus der Liste aus",

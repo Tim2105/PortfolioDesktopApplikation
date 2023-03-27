@@ -73,12 +73,59 @@ public class DeveloperEditViewController extends EditController<Developer> {
     	
     	this.contactListView.setCellFactory(val -> new ContactOpportunityListCell());
     	
+    	MenuItem newContactMenuItem = new MenuItem("Kontaktmöglichkeit hinzufügen");
+    	newContactMenuItem.setOnAction(ev -> {
+    		this.openContactEditView(null);
+    	});
+    	
+    	MenuItem editContactMenuItem = new MenuItem("Kontaktmöglichkeit bearbeiten");
+    	editContactMenuItem.setOnAction(ev -> {
+    		this.openContactEditView(this.contactListView.getSelectionModel().getSelectedItem());
+    	});
+    	editContactMenuItem.setDisable(true);
+    	
+    	MenuItem deleteContactMenuItem = new MenuItem("Kontaktmöglichkeit entfernen");
+    	deleteContactMenuItem.setOnAction(ev -> {
+			ContactOpportunity selectedContact = this.contactListView
+				.getSelectionModel().getSelectedItem();
+		
+			this.contactListView.getItems().remove(selectedContact);
+    	});
+    	deleteContactMenuItem.setDisable(true);
+    	
+    	this.contactListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    		editContactMenuItem.setDisable(newValue == null);
+    		deleteContactMenuItem.setDisable(newValue == null);
+    	});
+    	
+    	this.contactListView.setContextMenu(new ContextMenu(newContactMenuItem, editContactMenuItem, deleteContactMenuItem));
+    	
     	this.projectListView.setPlaceholder(new Label("Noch keine Projekte hinzugefügt"));
     	
     	this.projectListView.getSelectionModel()
     			.selectionModeProperty().set(SelectionMode.SINGLE);
     	
     	this.projectListView.setCellFactory(val -> new ProjectListCell());
+    	
+    	MenuItem newProjectMenuItem = new MenuItem("Projekt hinzufügen");
+    	newProjectMenuItem.setOnAction(ev -> {
+    		this.addProjects();
+    	});
+    	
+    	MenuItem deleteProjectMenuItem = new MenuItem("Projekt entfernen");
+    	deleteProjectMenuItem.setOnAction(ev -> {
+			Project selectedProject = this.projectListView
+				.getSelectionModel().getSelectedItem();
+			
+			this.projectListView.getItems().remove(selectedProject);
+    	});
+    	deleteProjectMenuItem.setDisable(true);
+    	
+    	this.projectListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    		deleteProjectMenuItem.setDisable(newValue == null);
+    	});
+    	
+    	this.projectListView.setContextMenu(new ContextMenu(newProjectMenuItem, deleteProjectMenuItem));
     }
 
     private void openContactEditView(ContactOpportunity contact) {

@@ -86,8 +86,12 @@ public class DBInterface {
 	}
 	
 	public void refresh(Object entity) {
-		if(entity != null)
+		if(entity != null) {
+			if(!this.em.contains(entity))
+				this.em.persist(entity);
+			
 			this.em.refresh(entity);
+		}
 	}
 	
 	public ObservableList<Project> getProjects() {

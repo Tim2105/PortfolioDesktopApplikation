@@ -17,8 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -79,6 +81,26 @@ public class ProjectEditViewController extends EditController<Project> {
     			));
     	
     	this.developerListView.setCellFactory(val -> new DeveloperListCell());
+    	
+    	MenuItem newMenuItem = new MenuItem("Entwickler hinzufügen");
+    	newMenuItem.setOnAction(ev -> {
+    		this.addDevelopers();
+    	});
+    	
+    	MenuItem deleteMenuItem = new MenuItem("Entwickler entfernen");
+    	deleteMenuItem.setOnAction(ev -> {
+    		Developer selectedDeveloper = this.developerListView
+    				.getSelectionModel().getSelectedItem();
+    		
+    		this.developerListView.getItems().remove(selectedDeveloper);
+    	});
+    	deleteMenuItem.setDisable(true);
+    	
+    	this.developerListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    		deleteMenuItem.setDisable(newValue == null);
+    	});
+    	
+    	this.developerListView.setContextMenu(new ContextMenu(newMenuItem, deleteMenuItem));
     }
 
     @FXML
