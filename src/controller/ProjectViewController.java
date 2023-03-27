@@ -187,13 +187,29 @@ public class ProjectViewController extends Controller {
     }
     
     @FXML
-    private void handleGuideMenuItemAction() {
-        // implementation code here
-    }
-    
-    @FXML
     private void handleAboutMenuItemAction() {
-        // implementation code here
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AboutView.fxml"));
+			Parent root = loader.load();
+			
+			Scene scene = new Scene(root);
+			
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(root.getScene().getWindow());
+			stage.setScene(scene);
+			
+			String stageTitle = "Über";
+			
+			stage.setTitle(stageTitle);
+			stage.show();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR,
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
+					ButtonType.OK);
+			alert.show();
+    	}
     }
     
     @FXML

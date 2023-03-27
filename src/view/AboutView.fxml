@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AboutViewController">
+   <bottom>
+      <Button fx:id="closeButton" defaultButton="true" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Schließen" BorderPane.alignment="BOTTOM_RIGHT">
+         <BorderPane.margin>
+            <Insets bottom="15.0" right="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <left>
+      <ImageView fitHeight="61.0" fitWidth="200.0" pickOnBounds="true" BorderPane.alignment="TOP_LEFT">
+         <BorderPane.margin>
+            <Insets left="30.0" top="30.0" />
+         </BorderPane.margin>
+         <image>
+            <Image url="@../assets/fh-swf-logo.png" />
+         </image>
+      </ImageView>
+   </left>
+   <center>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Teil der Projektarbeit:&#10;Entwicklung einer Portfolio-Website mitsamt Content Management System zur Darstellung von Projekten&#10;&#10;Sommersemester 2023&#10;&#10;Implementierungszeitraum:&#10;01.03.2023 - 30.04.2023&#10;&#10;Author:&#10;Tim Plotzki&#10;&#10;" wrapText="true">
+               <VBox.margin>
+                  <Insets left="4.0" />
+               </VBox.margin>
+            </Label>
+            <Hyperlink fx:id="urlHyperlink" onAction="#handleUrlHyperlinkAction" text="https://github.com/Tim2105/PortfolioDesktopApplikation" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="26.0" right="30.0" top="30.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>

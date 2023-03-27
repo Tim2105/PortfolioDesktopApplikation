@@ -22,12 +22,12 @@ public class DetailedProjectListCell extends ListCell<Project> {
 			
 			Label title = new Label(item.getTitle());
 			title.setWrapText(true);
-			title.prefWidthProperty().bind(this.widthProperty().subtract(15.0));
+			title.prefWidthProperty().bind(this.widthProperty().subtract(16.0));
 			title.setStyle("-fx-font-weight: bold;");
 			
 			Label description = new Label(item.getDescription());
 			description.setStyle("-fx-font-style: italic;");
-			description.prefWidthProperty().bind(this.widthProperty().subtract(15.0));
+			description.prefWidthProperty().bind(this.widthProperty().subtract(16.0));
 			description.setWrapText(true);
 			description.setTextOverrun(OverrunStyle.ELLIPSIS);
 			description.setMaxHeight(40.0);

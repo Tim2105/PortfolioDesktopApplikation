@@ -15,6 +15,12 @@ import model.DBConnectionData;
 import model.DBInterface;
 
 public class Main extends Application {
+	
+	private static Application applicationInstance = null;
+	
+	public static Application getApplication() {
+		return applicationInstance;
+	}
 
 	public static void main(String[] args) {
 		launch(args);
@@ -22,6 +28,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		applicationInstance = this;
 		
 		// Datenbankverbindung aufbauen
 		boolean connected = false, closed = false;
@@ -40,6 +47,8 @@ public class Main extends Application {
 					dialog = new Alert(AlertType.INFORMATION,
 							"Bevor wir loslegen können, müssen Sie die URL und Autorisationsdaten der Datenbank eingeben.",
 							ButtonType.CLOSE, ButtonType.NEXT);
+					
+					dialog.setTitle("Einrichtung");
 				} else {
 					dialog = new Alert(AlertType.ERROR,
 						"Es konnte keine Datenbankverbindung aufgebaut werden!\nÜberprüfen Sie die URL und Autorisationsdaten.",
