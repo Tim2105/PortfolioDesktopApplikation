@@ -73,8 +73,8 @@ public class ProjectEditViewController extends EditController<Project> {
     @FXML
     void initialize() {
     	this.developerListView.setPlaceholder(new EmptyListViewPlaceholder(
-    						"Noch keine Entwickler hinzugefügt",
-    						"Entwickler hinzufügen",
+    						"Noch keine Entwickler hinzugefÃ¼gt",
+    						"Entwickler hinzufÃ¼gen",
     						ev -> {
     							this.addDevelopers();
     						}
@@ -82,7 +82,7 @@ public class ProjectEditViewController extends EditController<Project> {
     	
     	this.developerListView.setCellFactory(val -> new DeveloperListCell());
     	
-    	MenuItem newMenuItem = new MenuItem("Entwickler hinzufügen");
+    	MenuItem newMenuItem = new MenuItem("Entwickler hinzufÃ¼gen");
     	newMenuItem.setOnAction(ev -> {
     		this.addDevelopers();
     	});
@@ -110,7 +110,7 @@ public class ProjectEditViewController extends EditController<Project> {
     	fcStage.initOwner(root.getScene().getWindow());
     	
     	FileChooser fc = new FileChooser();
-    	fc.setTitle("Datei öffnen");
+    	fc.setTitle("Datei Ã¶ffnen");
     	fc.getExtensionFilters().addAll(
     			new FileChooser.ExtensionFilter("Bilder", "*.png", "*.jpeg", "*.jpg"),
     			new FileChooser.ExtensionFilter("PNG", "*.png"),
@@ -159,7 +159,7 @@ public class ProjectEditViewController extends EditController<Project> {
 			stage.initOwner(root.getScene().getWindow());
 			stage.setScene(scene);
 			
-			String stageTitle = "Entwickler hinzufügen";
+			String stageTitle = "Entwickler hinzufÃ¼gen";
 			
 			stage.setTitle(stageTitle);
 			stage.showAndWait();
@@ -188,7 +188,7 @@ public class ProjectEditViewController extends EditController<Project> {
     		this.developerListView.getItems().remove(selectedDeveloper);
     	} else {
 			Alert alert = new Alert(AlertType.ERROR,
-					"Wählen Sie einen Entwickler aus der Liste aus",
+					"WÃ¤hlen Sie einen Entwickler aus der Liste aus",
 					ButtonType.OK);
 			alert.show();
     	}
@@ -226,7 +226,7 @@ public class ProjectEditViewController extends EditController<Project> {
 	    		
 	    		DBInterface.getInstance().getProjects().add(p);
 	    	} else {
-	    		// Verändere das Projekt und persistiere die Änderungen
+	    		// VerÃ¤ndere das Projekt und persistiere die Ã„nderungen
     			this.entity.setTitle(this.titleTextField.getText());
     			this.entity.setDescription(this.descriptionTextField.getText());
     			
@@ -246,7 +246,7 @@ public class ProjectEditViewController extends EditController<Project> {
     			em.getTransaction().commit();
     			em.close();
     			
-    			// Unschöner Trick, um nur das veränderte Element neu zu zeichnen
+    			// UnschÃ¶ner Trick, um nur das verï¿½nderte Element neu zu zeichnen
     			int index = DBInterface.getInstance().getProjects().indexOf(this.entity);
     			DBInterface.getInstance().getProjects().remove(index);
     			DBInterface.getInstance().getProjects().add(index, this.entity);

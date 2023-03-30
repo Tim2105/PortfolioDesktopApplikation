@@ -63,7 +63,7 @@ public class ProjectViewController extends Controller {
     void initialize() {
     	this.projectsListView.setPlaceholder(new EmptyListViewPlaceholder(
     						"Noch keine Projekte erstellt",
-    						"Projekt hinzufügen",
+    						"Projekt hinzufÃ¼gen",
     						ev -> {
     							this.openProjectEditView(null);
     						}
@@ -74,7 +74,7 @@ public class ProjectViewController extends Controller {
     	
     	this.projectsListView.setCellFactory(val -> new DetailedProjectListCell());
     	
-    	MenuItem newMenuItem = new MenuItem("Projekt hinzufügen");
+    	MenuItem newMenuItem = new MenuItem("Projekt hinzufÃ¼gen");
     	newMenuItem.setOnAction(ev -> {
     		this.openProjectEditView(null);
     	});
@@ -92,7 +92,7 @@ public class ProjectViewController extends Controller {
 
     		if(selectedProject != null) {
     			Alert warningDialog = new Alert(AlertType.WARNING,
-    					"Möchten Sie das Projekt wirklich löschen?\nDiese Aktion ist permanent!",
+    					"MÃ¶chten Sie das Projekt wirklich lÃ¶schen?\nDiese Aktion ist permanent!",
     					ButtonType.NO, ButtonType.YES);
     			Optional<ButtonType> result = warningDialog.showAndWait();
     			
@@ -235,7 +235,7 @@ public class ProjectViewController extends Controller {
 			stage.initOwner(root.getScene().getWindow());
 			stage.setScene(scene);
 			
-			String stageTitle = "Über";
+			String stageTitle = "ï¿½ber";
 			
 			stage.setTitle(stageTitle);
 			stage.show();
@@ -262,7 +262,7 @@ public class ProjectViewController extends Controller {
     		this.openProjectEditView(selectedProject);
     	else {
     		Alert alert = new Alert(AlertType.ERROR,
-					"Wählen Sie ein Projekt aus der Liste aus",
+					"WÃ¤hlen Sie ein Projekt aus der Liste aus",
 					ButtonType.OK);
 			alert.showAndWait();
     	}
@@ -282,7 +282,7 @@ public class ProjectViewController extends Controller {
 			DBInterface.getInstance().getProjects().remove(project);
 		} catch(Exception e) {
 			Alert alert = new Alert(AlertType.ERROR,
-					"Das Löschen des Projektes ist fehlgeschlagen",
+					"Das LÃ¶schen des Projektes ist fehlgeschlagen",
 					ButtonType.OK);
 				alert.showAndWait();
 		}
@@ -295,7 +295,7 @@ public class ProjectViewController extends Controller {
 
 		if(selectedProject != null) {
 			Alert warningDialog = new Alert(AlertType.WARNING,
-					"Möchten Sie das Projekt wirklich löschen?\nDiese Aktion ist permanent!",
+					"MÃ¶chten Sie das Projekt wirklich lÃ¶schen?\nDiese Aktion ist permanent!",
 					ButtonType.NO, ButtonType.YES);
 			Optional<ButtonType> result = warningDialog.showAndWait();
 			
@@ -303,7 +303,7 @@ public class ProjectViewController extends Controller {
 				this.deleteProject(selectedProject);
 		} else {
 			Alert alert = new Alert(AlertType.ERROR,
-				"Wählen Sie ein Projekt aus der Liste aus",
+				"WÃ¤hlen Sie ein Projekt aus der Liste aus",
 				ButtonType.OK);
 			alert.showAndWait();
 		}

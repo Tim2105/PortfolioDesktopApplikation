@@ -21,7 +21,7 @@ public class SelectDeveloperViewController extends SelectController<Developer> {
     
     @FXML
     void initialize() {
-    	this.developerListView.setPlaceholder(new Label("Es können keine weiteren Entwickler hinzugefügt werden"));
+    	this.developerListView.setPlaceholder(new Label("Es kÃ¶nnen keine weiteren Entwickler hinzugefÃ¼gt werden"));
     	
     	this.developerListView.getSelectionModel()
     			.selectionModeProperty().set(SelectionMode.MULTIPLE);

@@ -39,8 +39,8 @@ public class DeveloperViewController extends Controller {
     @FXML
     void initialize() {
     	this.developerListView.setPlaceholder(new EmptyListViewPlaceholder(
-    						"Noch keine Entwickler hinzugefügt",
-    						"Entwickler hinzufügen",
+    						"Noch keine Entwickler hinzugefÃ¼gt",
+    						"Entwickler hinzufÃ¼gen",
     						ev -> {
     							this.openDeveloperEditView(null);
     						}
@@ -51,7 +51,7 @@ public class DeveloperViewController extends Controller {
     	
     	this.developerListView.setCellFactory(val -> new DetailedDeveloperListCell());
     	
-    	MenuItem newMenuItem = new MenuItem("Entwickler hinzufügen");
+    	MenuItem newMenuItem = new MenuItem("Entwickler hinzufÃ¼gen");
     	newMenuItem.setOnAction(ev -> {
     		this.openDeveloperEditView(null);
     	});
@@ -69,7 +69,7 @@ public class DeveloperViewController extends Controller {
 
     		if(selectedDeveloper != null) {
     			Alert warningDialog = new Alert(AlertType.WARNING,
-    					"Möchten Sie den Entwickler wirklich löschen?\nDiese Aktion ist permanent!",
+    					"MÃ¶chten Sie den Entwickler wirklich lÃ¶schen?\nDiese Aktion ist permanent!",
     					ButtonType.NO, ButtonType.YES);
     			Optional<ButtonType> result = warningDialog.showAndWait();
     			
@@ -139,7 +139,7 @@ public class DeveloperViewController extends Controller {
     		this.openDeveloperEditView(selectedDeveloper);
     	else {
     		Alert alert = new Alert(AlertType.ERROR,
-					"Wählen Sie einen Entwickler aus der Liste aus",
+					"WÃ¤hlen Sie einen Entwickler aus der Liste aus",
 					ButtonType.OK);
 			alert.showAndWait();
     	}
@@ -159,7 +159,7 @@ public class DeveloperViewController extends Controller {
 			DBInterface.getInstance().getDevelopers().remove(developer);
 		} catch(Exception e) {
 			Alert alert = new Alert(AlertType.ERROR,
-					"Das Löschen des Entwicklers ist fehlgeschlagen",
+					"Das LÃ¶schen des Entwicklers ist fehlgeschlagen",
 					ButtonType.OK);
 				alert.showAndWait();
 		}
@@ -172,7 +172,7 @@ public class DeveloperViewController extends Controller {
     	
     	if(selectedDeveloper != null) {
     		Alert warningDialog = new Alert(AlertType.WARNING,
-					"Möchten Sie den Entwickler wirklich löschen?\nDiese Aktion ist permanent!",
+					"MÃ¶chten Sie den Entwickler wirklich lÃ¶schen?\nDiese Aktion ist permanent!",
 					ButtonType.NO, ButtonType.YES);
 			Optional<ButtonType> result = warningDialog.showAndWait();
 			
@@ -180,7 +180,7 @@ public class DeveloperViewController extends Controller {
 				this.deleteDeveloper(selectedDeveloper);
     	} else {
     		Alert alert = new Alert(AlertType.ERROR,
-    				"Wählen Sie einen Entwickler aus der Liste aus",
+    				"WÃ¤hlen Sie einen Entwickler aus der Liste aus",
     				ButtonType.OK);
     			alert.showAndWait();
     	}

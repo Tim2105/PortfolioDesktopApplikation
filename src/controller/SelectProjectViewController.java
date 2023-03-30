@@ -21,7 +21,7 @@ public class SelectProjectViewController extends SelectController<Project> {
     
     @FXML
     void initialize() {
-    	this.projectListView.setPlaceholder(new Label("Es können keine weiteren Projekte hinzugefügt werden"));
+    	this.projectListView.setPlaceholder(new Label("Es kÃ¶nnen keine weiteren Projekte hinzugefÃ¼gt werden"));
     	
     	this.projectListView.getSelectionModel()
     			.selectionModeProperty().set(SelectionMode.MULTIPLE);

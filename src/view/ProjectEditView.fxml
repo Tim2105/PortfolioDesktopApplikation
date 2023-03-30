@@ -34,14 +34,15 @@
    <children>
       <Label text="Titel*" GridPane.halignment="CENTER" />
       <TextField fx:id="titleTextField" prefHeight="26.0" prefWidth="74.0" promptText="Projekttitel" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+      <TextArea fx:id="descriptionTextField" prefHeight="200.0" prefWidth="200.0" promptText="Projektbeschreibung" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="3" />
       <Label text="Beschreibung*" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="3.0" />
          </GridPane.margin></Label>
       <Label text="Bild" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label text="Link zu Quelle" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <Label text="Link zu Demo" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-      <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <TextField fx:id="downloadTextField" promptText="Link zum Download" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <TextField fx:id="demoTextField" promptText="Link zu Demonstration" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <Label fx:id="imagePreviewLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="258.0" maxWidth="532.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2;" text="Vorschau des Bildes" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.rowSpan="6" GridPane.valignment="CENTER">
@@ -57,7 +58,6 @@
       <ListView fx:id="developerListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.rowSpan="3" />
       <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Abbrechen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
       <Button fx:id="confirmButton" defaultButton="true" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Bestätigen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
-      <TextArea fx:id="descriptionTextField" prefHeight="200.0" prefWidth="200.0" promptText="Projektbeschreibung" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="3" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

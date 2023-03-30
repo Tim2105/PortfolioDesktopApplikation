@@ -61,8 +61,8 @@ public class DeveloperEditViewController extends EditController<Developer> {
     @FXML
     void initialize() {
     	this.contactListView.setPlaceholder(new EmptyListViewPlaceholder(
-    						"Erzählen Sie uns,\nwie man Sie erreichen kann",
-    						"Kontaktmöglichkeit hinzufügen",
+    						"ErzÃ¤hlen Sie uns,\nwie man Sie erreichen kann",
+    						"KontaktmÃ¶glichkeit hinzufÃ¼gen",
     						ev -> {
     							this.openContactEditView(null);
     						}
@@ -73,18 +73,18 @@ public class DeveloperEditViewController extends EditController<Developer> {
     	
     	this.contactListView.setCellFactory(val -> new ContactOpportunityListCell());
     	
-    	MenuItem newContactMenuItem = new MenuItem("Kontaktmöglichkeit hinzufügen");
+    	MenuItem newContactMenuItem = new MenuItem("KontaktmÃ¶glichkeit hinzufï¿½gen");
     	newContactMenuItem.setOnAction(ev -> {
     		this.openContactEditView(null);
     	});
     	
-    	MenuItem editContactMenuItem = new MenuItem("Kontaktmöglichkeit bearbeiten");
+    	MenuItem editContactMenuItem = new MenuItem("KontaktmÃ¶glichkeit bearbeiten");
     	editContactMenuItem.setOnAction(ev -> {
     		this.openContactEditView(this.contactListView.getSelectionModel().getSelectedItem());
     	});
     	editContactMenuItem.setDisable(true);
     	
-    	MenuItem deleteContactMenuItem = new MenuItem("Kontaktmöglichkeit entfernen");
+    	MenuItem deleteContactMenuItem = new MenuItem("KontaktmÃ¶glichkeit entfernen");
     	deleteContactMenuItem.setOnAction(ev -> {
 			ContactOpportunity selectedContact = this.contactListView
 				.getSelectionModel().getSelectedItem();
@@ -100,14 +100,14 @@ public class DeveloperEditViewController extends EditController<Developer> {
     	
     	this.contactListView.setContextMenu(new ContextMenu(newContactMenuItem, editContactMenuItem, deleteContactMenuItem));
     	
-    	this.projectListView.setPlaceholder(new Label("Noch keine Projekte hinzugefügt"));
+    	this.projectListView.setPlaceholder(new Label("Noch keine Projekte hinzugefÃ¼gt"));
     	
     	this.projectListView.getSelectionModel()
     			.selectionModeProperty().set(SelectionMode.SINGLE);
     	
     	this.projectListView.setCellFactory(val -> new ProjectListCell());
     	
-    	MenuItem newProjectMenuItem = new MenuItem("Projekt hinzufügen");
+    	MenuItem newProjectMenuItem = new MenuItem("Projekt hinzufÃ¼gen");
     	newProjectMenuItem.setOnAction(ev -> {
     		this.addProjects();
     	});
@@ -147,13 +147,13 @@ public class DeveloperEditViewController extends EditController<Developer> {
 			if(contact != null)
 				stageTitle += contact.getPlatform().toString();
 			else
-				stageTitle += "Neue Kontaktmöglichkeit";
+				stageTitle += "Neue KontaktmÃ¶glichkeit";
 			
 			stage.setTitle(stageTitle);
 			stage.showAndWait();
 			
 			if(contact == null && controller.getEntity() != null) {
-				// Füge neue Kontaktmöglichkeit hinzu
+				// Fï¿½ge neue Kontaktmï¿½glichkeit hinzu
 				this.contactListView.getItems().add(controller.getEntity());
 			} else {
 				// Liste neu zeichnen
@@ -198,7 +198,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    		em.persist(d);
 	    		
 	    		// Die Klasse Project ist der Besitzer der n-m-Beziehung.
-	    		// Deshalb müssen alle Änderungen in der Assoziationstabelle über Projekte passieren
+	    		// Deshalb mï¿½ssen alle ï¿½nderungen in der Assoziationstabelle ï¿½ber Projekte passieren
 	    		for(Project p : d.getProjects())
 	    			em.merge(p);
 	    		
@@ -208,7 +208,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    		
 	    		DBInterface.getInstance().getDevelopers().add(d);
     		} else {
-    			// Verändere den Entwickler und persistiere alle Änderungen
+    			// Verï¿½ndere den Entwickler und persistiere alle ï¿½nderungen
     			
     			this.entity.setFirstname(this.firstNameTextField.getText());
     			this.entity.setLastname(this.lastNameTextField.getText());
@@ -242,13 +242,13 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    			em.merge(c);
 	    		
 	    		// Die Klasse Project ist der Besitzer der n-m-Beziehung.
-	    		// Deshalb müssen alle Änderungen in der Assoziationstabelle über Projekte passieren
+	    		// Deshalb mï¿½ssen alle ï¿½nderungen in der Assoziationstabelle ï¿½ber Projekte passieren
 	    		
 	    		// evtl. alte Projekte entfernen
 	    		for(Project p : oldProjects)
 	    			em.merge(p);
 	    		
-	    		// evtl. neue Projekte hinzufügen
+	    		// evtl. neue Projekte hinzufï¿½gen
 	    		for(Project p : this.entity.getProjects())
 	    			em.merge(p);
 	    		
@@ -286,7 +286,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 			this.openContactEditView(selectedContact);
 		else {
 			Alert alert = new Alert(AlertType.ERROR,
-					"Wählen Sie eine Kontaktmöglichkeit aus der Liste aus",
+					"Wï¿½hlen Sie eine KontaktmÃ¶glichkeit aus der Liste aus",
 					ButtonType.OK);
 			alert.showAndWait();
 		}
@@ -300,7 +300,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
     		this.contactListView.getItems().remove(selectedContact);
     	} else {
     		Alert alert = new Alert(AlertType.ERROR,
-					"Wählen Sie eine Kontaktmöglichkeit aus der Liste aus",
+					"Wï¿½hlen Sie eine KontaktmÃ¶glichkeit aus der Liste aus",
 					ButtonType.OK);
 			alert.show();
     	}
@@ -326,7 +326,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 			stage.initOwner(root.getScene().getWindow());
 			stage.setScene(scene);
 			
-			String stageTitle = "Projekte hinzufügen";
+			String stageTitle = "Projekte hinzufÃ¼gen";
 			
 			stage.setTitle(stageTitle);
 			stage.showAndWait();
@@ -355,7 +355,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
     		this.projectListView.getItems().remove(selectedProject);
     	} else {
     		Alert alert = new Alert(AlertType.ERROR,
-					"Wählen Sie ein Projekt aus der Liste aus",
+					"WÃ¤hlen Sie ein Projekt aus der Liste aus",
 					ButtonType.OK);
 			alert.show();
     	}

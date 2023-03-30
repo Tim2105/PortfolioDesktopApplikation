@@ -48,7 +48,7 @@ public class DBConnectionViewController extends EditController<DBConnectionData>
     		this.close();
     	} catch(IllegalStateException e) {
     		Alert alert = new Alert(AlertType.ERROR,
-					"Es konnte keine Datenbankverbindung aufgebaut werden!\n‹berpr¸fen Sie die URL und Autorisierungsdaten.",
+					"Es konnte keine Datenbankverbindung aufgebaut werden!\n√úberpr√ºfen Sie die URL und Autorisierungsdaten.",
 					ButtonType.OK);
 			alert.show();
     	} catch(IOException e) {
