@@ -47,7 +47,7 @@ public class DBInterface {
 		try {
 			Map<String, String> overrides = new HashMap<String, String>();
 			if(url != null)
-				overrides.put("jakarta.persistence.jdbc.url", url);
+				overrides.put("jakarta.persistence.jdbc.url", url + "?useUnicode=true&encoding=utf8");
 			
 			if(user != null)
 				overrides.put("jakarta.persistence.jdbc.user", user);

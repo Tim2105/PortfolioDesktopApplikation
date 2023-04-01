@@ -73,7 +73,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
     	
     	this.contactListView.setCellFactory(val -> new ContactOpportunityListCell());
     	
-    	MenuItem newContactMenuItem = new MenuItem("Kontaktmöglichkeit hinzuf�gen");
+    	MenuItem newContactMenuItem = new MenuItem("Kontaktmöglichkeit hinzufügen");
     	newContactMenuItem.setOnAction(ev -> {
     		this.openContactEditView(null);
     	});
