@@ -22,7 +22,7 @@ import model.DBInterface;
 import view.DetailedDeveloperListCell;
 import view.EmptyListViewPlaceholder;
 
-public class DeveloperViewController extends Controller {
+public class DeveloperViewController extends Controller implements Refreshable {
 
     @FXML
     private Button addDeveloperButton;
@@ -89,6 +89,7 @@ public class DeveloperViewController extends Controller {
     	this.developerListView.setItems(DBInterface.getInstance().getDevelopers());
     }
     
+    @Override
     public void refresh() {
     	this.developerListView.setItems(DBInterface.getInstance().getDevelopers());
     }

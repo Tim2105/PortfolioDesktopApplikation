@@ -72,10 +72,10 @@ public class Project {
 		
 		if(image != null ) {
 			if(!image.canRead())
-				throw new IOException("Für diese Datei besitzt das Programm keine Leseberechtigungen.");
+				throw new IOException("FÃ¼r diese Datei besitzt das Programm keine Leseberechtigungen.");
 			
 			if(!image.isFile())
-				throw new IllegalArgumentException("Der angegebene Pfad führt zu keiner Datei.");
+				throw new IllegalArgumentException("Der angegebene Pfad fÃ¼hrt zu keiner Datei.");
 			
 			String fileExtension = "";
 			String filePath = image.getAbsolutePath();

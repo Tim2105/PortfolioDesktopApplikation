@@ -5,6 +5,8 @@
              version="3.1">
 	<persistence-unit name="Database">
 		<class>entity.ContactOpportunity</class>
+		<class>entity.Demonstration</class>
+		<class>entity.DemonstrationFile</class>
 		<class>entity.Developer</class>
 		<class>entity.Project</class>
 		<properties>

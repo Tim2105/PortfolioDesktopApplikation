@@ -3,6 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+import entity.Demonstration;
 import entity.Developer;
 import entity.Project;
 import jakarta.persistence.EntityManager;
@@ -35,6 +36,8 @@ public class DBInterface {
 	
 	private ObservableList<Developer> developers;
 	
+	private ObservableList<Demonstration> demonstrations;
+	
 	private DBInterface() {
 		this(DBConnectionData.loadFromResource());
 	}
@@ -63,6 +66,7 @@ public class DBInterface {
 		
 		this.projects = FXCollections.observableArrayList();
 		this.developers = FXCollections.observableArrayList();
+		this.demonstrations = FXCollections.observableArrayList();
 		
 		this.loadFromDB();
 	}
@@ -75,6 +79,10 @@ public class DBInterface {
 		TypedQuery<Developer> developerQuery = this.em.createQuery("select d from Developer d", Developer.class);
 		this.developers.clear();
 		this.developers.addAll(developerQuery.getResultList());
+		
+		TypedQuery<Demonstration> demonstrationQuery = this.em.createQuery("select d from Demonstration d", Demonstration.class);
+		this.demonstrations.clear();
+		this.demonstrations.addAll(demonstrationQuery.getResultList());
 	}
 	
 	public void refresh() {
@@ -100,6 +108,10 @@ public class DBInterface {
 
 	public ObservableList<Developer> getDevelopers() {
 		return this.developers;
+	}
+	
+	public ObservableList<Demonstration> getDemonstrations() {
+		return this.demonstrations;
 	}
 	
 	public EntityManager createEntityManager() {

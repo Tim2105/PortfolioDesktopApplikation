@@ -22,7 +22,7 @@ import model.DBInterface;
 import view.DetailedProjectListCell;
 import view.EmptyListViewPlaceholder;
 
-public class ProjectViewController extends Controller {
+public class ProjectViewController extends Controller implements Refreshable {
     
     @FXML
     private Button newProjectButton;
@@ -89,6 +89,7 @@ public class ProjectViewController extends Controller {
     	this.projectsListView.setItems(DBInterface.getInstance().getProjects());
     }
     
+    @Override
     public void refresh() {
     	this.projectsListView.setItems(DBInterface.getInstance().getProjects());
     }

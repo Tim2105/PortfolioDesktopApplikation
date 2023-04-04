@@ -39,9 +39,14 @@ public class MainViewController extends Controller {
 	@FXML
 	private Tab developerTab;
 	
-	private ProjectViewController projectViewController = null;
+	@FXML
+	private Tab demonstrationTab;
 	
-	private DeveloperViewController developerViewController = null;
+	private Refreshable projectViewController = null;
+	
+	private Refreshable developerViewController = null;
+	
+	private Refreshable demonstrationViewController = null;
 	
 	@FXML
 	void initialize() {
@@ -74,6 +79,21 @@ public class MainViewController extends Controller {
 					ButtonType.OK);
 			alert.show();
     	}
+		
+		try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DemonstrationView.fxml"));
+			Parent root = loader.load();
+			this.demonstrationViewController = loader.getController();
+			
+			this.demonstrationTab.setContent(root);
+			
+    	} catch(Exception e) {
+    		e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR,
+					"Ein unerwarteter beim Laden des Demonstrationstabs Fehler ist aufgetreten:\n" + e.getMessage(),
+					ButtonType.OK);
+			alert.show();
+    	}
 	}
 	
 	private void refreshLists() {
@@ -82,6 +102,9 @@ public class MainViewController extends Controller {
 		
 		if(this.developerViewController != null)
 			this.developerViewController.refresh();
+		
+		if(this.demonstrationViewController != null)
+			this.demonstrationViewController.refresh();
 	}
 	
 	private void openProjectEditView(Project project) {
