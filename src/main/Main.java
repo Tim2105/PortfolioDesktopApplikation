@@ -88,7 +88,7 @@ public class Main extends Application {
 		
 		if(!closed) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProjectView.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
 				Parent root = loader.load();
 				Scene scene = new Scene(root);
 				

@@ -2,43 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectViewController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Neu">
-            <items>
-              <MenuItem fx:id="newProjectMenuItem" mnemonicParsing="false" onAction="#handleNewProjectMenuItemAction" text="Projekt" />
-                  <MenuItem fx:id="newDeveloperMenuItem" mnemonicParsing="false" onAction="#handleNewDeveloperMenuItemAction" text="Entwickler" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Datenbank">
-            <items>
-              <MenuItem fx:id="newConnectionMenuItem" mnemonicParsing="false" onAction="#handleNewConnectionMenuItemAction" text="Neue Verbindung" />
-                  <MenuItem fx:id="refreshMenuItem" mnemonicParsing="false" onAction="#handleRefreshMenuItemAction" text="Aktualisieren" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Hilfe">
-            <items>
-                  <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleAboutMenuItemAction" text="Über" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <left>
-      <VBox alignment="CENTER" prefHeight="374.0" prefWidth="250.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="374.0" prefWidth="250.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="newProjectButton" mnemonicParsing="false" onAction="#handleNewProjectButtonAction" text="Projekt hinzufügen" />
             <Button fx:id="editProjectButton" mnemonicParsing="false" onAction="#handleEditProjectButtonAction" text="Projekt bearbeiten" />
             <Button fx:id="deleteProjectButton" mnemonicParsing="false" onAction="#handleDeleteProjectButtonAction" text="Projekt entfernen" />
-            <Button fx:id="showDeveloperButton" mnemonicParsing="false" onAction="#handleShowDeveloperButtonAction" text="Entwickler anzeigen" />
          </children>
       </VBox>
    </left>

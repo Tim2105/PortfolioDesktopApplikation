@@ -286,7 +286,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 			this.openContactEditView(selectedContact);
 		else {
 			Alert alert = new Alert(AlertType.ERROR,
-					"W�hlen Sie eine Kontaktmöglichkeit aus der Liste aus",
+					"Wählen Sie eine Kontaktmöglichkeit aus der Liste aus",
 					ButtonType.OK);
 			alert.showAndWait();
 		}
@@ -300,7 +300,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
     		this.contactListView.getItems().remove(selectedContact);
     	} else {
     		Alert alert = new Alert(AlertType.ERROR,
-					"W�hlen Sie eine Kontaktmöglichkeit aus der Liste aus",
+					"Wählen Sie eine Kontaktmöglichkeit aus der Liste aus",
 					ButtonType.OK);
 			alert.show();
     	}

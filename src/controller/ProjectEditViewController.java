@@ -46,6 +46,9 @@ public class ProjectEditViewController extends EditController<Project> {
 
     @FXML
     private Button chooseFileButton;
+    
+    @FXML
+    private Button removeImageButton;
 
     @FXML
     private TextField downloadTextField;
@@ -69,6 +72,8 @@ public class ProjectEditViewController extends EditController<Project> {
     private Button confirmButton;
     
     private File selectedImage;
+    
+    private boolean imageRemoved = false;
     
     @FXML
     void initialize() {
@@ -137,6 +142,14 @@ public class ProjectEditViewController extends EditController<Project> {
 				alert.show();
 			}
     	}
+    }
+    
+    @FXML
+    private void handleRemoveImageButtonAction() {
+    	this.selectedImage = null;
+    	this.imageRemoved = true;
+    	this.imagePreviewLabel.setGraphic(null);
+    	this.imagePreviewLabel.setText("Vorschau des Bildes");
     }
     
     private void addDevelopers() {
@@ -232,6 +245,8 @@ public class ProjectEditViewController extends EditController<Project> {
     			
     			if(this.selectedImage != null)
     				this.entity.setImage(Files.readAllBytes(this.selectedImage.toPath()));
+    			else if(this.imageRemoved)
+    				this.entity.setImage(null);
     			
     			this.entity.setSourceURL(this.downloadTextField.getText());
     			this.entity.setDemoURL(this.demoTextField.getText());
@@ -245,11 +260,6 @@ public class ProjectEditViewController extends EditController<Project> {
 	    		em.merge(this.entity);
     			em.getTransaction().commit();
     			em.close();
-    			
-    			// Unschöner Trick, um nur das ver�nderte Element neu zu zeichnen
-    			int index = DBInterface.getInstance().getProjects().indexOf(this.entity);
-    			DBInterface.getInstance().getProjects().remove(index);
-    			DBInterface.getInstance().getProjects().add(index, this.entity);
 	    	}
 	    	
 	    	this.close();

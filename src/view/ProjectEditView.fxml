@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -39,8 +40,13 @@
          <GridPane.margin>
             <Insets top="3.0" />
          </GridPane.margin></Label>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" />
+            <Button fx:id="removeImageButton" mnemonicParsing="false" onAction="#handleRemoveImageButtonAction" text="Bild entfernen" />
+         </children>
+      </HBox>
       <Label text="Bild" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-      <Button fx:id="chooseFileButton" mnemonicParsing="false" onAction="#handleChooseFileButtonAction" text="Datei auswählen" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label text="Link zu Quelle" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <Label text="Link zu Demo" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <TextField fx:id="downloadTextField" promptText="Link zum Download" GridPane.columnIndex="1" GridPane.rowIndex="5" />

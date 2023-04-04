@@ -89,6 +89,10 @@ public class DeveloperViewController extends Controller {
     	this.developerListView.setItems(DBInterface.getInstance().getDevelopers());
     }
     
+    public void refresh() {
+    	this.developerListView.setItems(DBInterface.getInstance().getDevelopers());
+    }
+    
     private void openDeveloperEditView(Developer developer) {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DeveloperEditView.fxml"));

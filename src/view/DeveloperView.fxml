@@ -6,28 +6,28 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeveloperViewController">
+<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeveloperViewController">
    <left>
-      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="374.0" prefWidth="250.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addDeveloperButton" mnemonicParsing="false" onAction="#handleAddDeveloperButtonAction" text="Entwickler hinzufügen">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </VBox.margin>
             </Button>
             <Button fx:id="changeDeveloperButton" mnemonicParsing="false" onAction="#handleChangeDeveloperButtonAction" text="Entwickler bearbeiten">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </VBox.margin>
             </Button>
             <Button fx:id="deleteDeveloperButton" mnemonicParsing="false" onAction="#handleDeleteDeveloperButtonAction" text="Entwickler entfernen">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </VBox.margin>
             </Button>
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets />
          </BorderPane.margin>
       </VBox>
    </left>
