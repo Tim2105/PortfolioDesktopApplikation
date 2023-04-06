@@ -31,7 +31,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DBInterface;
 import view.DeveloperListCell;
-import view.EmptyListViewPlaceholder;
+import view.EmptyViewPlaceholder;
 
 public class ProjectEditViewController extends EditController<Project> {
 
@@ -77,7 +77,7 @@ public class ProjectEditViewController extends EditController<Project> {
     
     @FXML
     void initialize() {
-    	this.developerListView.setPlaceholder(new EmptyListViewPlaceholder(
+    	this.developerListView.setPlaceholder(new EmptyViewPlaceholder(
     						"Noch keine Entwickler hinzugefügt",
     						"Entwickler hinzufügen",
     						ev -> {
@@ -112,7 +112,7 @@ public class ProjectEditViewController extends EditController<Project> {
     private void handleChooseFileButtonAction() {
     	Stage fcStage = new Stage();
     	fcStage.initModality(Modality.APPLICATION_MODAL);
-    	fcStage.initOwner(root.getScene().getWindow());
+    	fcStage.initOwner(this.root.getScene().getWindow());
     	
     	FileChooser fc = new FileChooser();
     	fc.setTitle("Datei öffnen");

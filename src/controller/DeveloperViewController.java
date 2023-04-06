@@ -20,7 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DBInterface;
 import view.DetailedDeveloperListCell;
-import view.EmptyListViewPlaceholder;
+import view.EmptyViewPlaceholder;
 
 public class DeveloperViewController extends Controller implements Refreshable {
 
@@ -38,7 +38,7 @@ public class DeveloperViewController extends Controller implements Refreshable {
     
     @FXML
     void initialize() {
-    	this.developerListView.setPlaceholder(new EmptyListViewPlaceholder(
+    	this.developerListView.setPlaceholder(new EmptyViewPlaceholder(
     						"Noch keine Entwickler hinzugefügt",
     						"Entwickler hinzufügen",
     						ev -> {

@@ -17,7 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DBInterface;
 import view.ContactOpportunityListCell;
-import view.EmptyListViewPlaceholder;
+import view.EmptyViewPlaceholder;
 import view.ProjectListCell;
 
 public class DeveloperEditViewController extends EditController<Developer> {
@@ -60,7 +60,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
     
     @FXML
     void initialize() {
-    	this.contactListView.setPlaceholder(new EmptyListViewPlaceholder(
+    	this.contactListView.setPlaceholder(new EmptyViewPlaceholder(
     						"Erzählen Sie uns,\nwie man Sie erreichen kann",
     						"Kontaktmöglichkeit hinzufügen",
     						ev -> {
@@ -198,7 +198,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    		em.persist(d);
 	    		
 	    		// Die Klasse Project ist der Besitzer der n-m-Beziehung.
-	    		// Deshalb m�ssen alle �nderungen in der Assoziationstabelle �ber Projekte passieren
+	    		// Deshalb müssen alle Änderungen in der Assoziationstabelle über Projekte passieren
 	    		for(Project p : d.getProjects())
 	    			em.merge(p);
 	    		
@@ -208,7 +208,7 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    		
 	    		DBInterface.getInstance().getDevelopers().add(d);
     		} else {
-    			// Ver�ndere den Entwickler und persistiere alle �nderungen
+    			// Verändere den Entwickler und persistiere alle Änderungen
     			
     			this.entity.setFirstname(this.firstNameTextField.getText());
     			this.entity.setLastname(this.lastNameTextField.getText());
@@ -242,13 +242,13 @@ public class DeveloperEditViewController extends EditController<Developer> {
 	    			em.merge(c);
 	    		
 	    		// Die Klasse Project ist der Besitzer der n-m-Beziehung.
-	    		// Deshalb m�ssen alle �nderungen in der Assoziationstabelle �ber Projekte passieren
+	    		// Deshalb müssen alle Änderungen in der Assoziationstabelle über Projekte passieren
 	    		
 	    		// evtl. alte Projekte entfernen
 	    		for(Project p : oldProjects)
 	    			em.merge(p);
 	    		
-	    		// evtl. neue Projekte hinzuf�gen
+	    		// evtl. neue Projekte hinzufügen
 	    		for(Project p : this.entity.getProjects())
 	    			em.merge(p);
 	    		
@@ -369,15 +369,6 @@ public class DeveloperEditViewController extends EditController<Developer> {
 		this.firstNameTextField.setText(this.entity.getFirstname());
 		this.lastNameTextField.setText(this.entity.getLastname());
 		this.descriptionTextArea.setText(this.entity.getDescription());
-		
-//		List<ContactOpportunity> contactCopies = new ArrayList<ContactOpportunity>();
-//		
-//		for(ContactOpportunity c : this.entity.getContactOpportunities()) {
-//			ContactOpportunity copy = new ContactOpportunity(c.getPlatform(), c.getURL());
-//			copy.id = c.id;
-//			
-//			contactCopies.add(copy);
-//		}
 		
 		this.contactListView.getItems().addAll(this.entity.getContactOpportunities());
 		

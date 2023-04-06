@@ -13,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 
 @Entity
 @Table(name = "DEMONSTRATION_FILE")
@@ -27,6 +30,9 @@ public class DemonstrationFile {
 	@Column(name = "FILENAME")
 	public String filename;
 	
+	@Transient
+	private SimpleStringProperty filenameProperty;
+	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "FILE")
@@ -40,6 +46,7 @@ public class DemonstrationFile {
 			throw new IllegalArgumentException("Geben Sie eine Datei an");
 		
 		this.filename = filename;
+		this.filenameProperty = new SimpleStringProperty(filename);
 		
 		if(!file.canRead())
 			throw new IOException("Für diese Datei besitzt das Programm keine Leseberechtigungen.");
@@ -56,7 +63,7 @@ public class DemonstrationFile {
 	}
 	
 	public DemonstrationFile() {
-		
+		this.filenameProperty = new SimpleStringProperty();
 	}
 	
 	@Override
@@ -83,9 +90,18 @@ public class DemonstrationFile {
 	public String getFilename() {
 		return filename;
 	}
+	
+	public ObservableValue<String> getFilenameProperty() {
+		if(this.filenameProperty.get() == null ||
+			!this.filenameProperty.get().equals(this.filename))
+			this.filenameProperty.set(this.filename);
+		
+		return this.filenameProperty;
+	}
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+		this.filenameProperty.set(filename);
 	}
 
 	public Demonstration getDemonstration() {

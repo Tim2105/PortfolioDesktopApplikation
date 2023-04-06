@@ -44,6 +44,21 @@ public class Demonstration {
 		this.files = new ArrayList<DemonstrationFile>();
 	}
 	
+	public Demonstration(String name, DemonstrationFile welcomePage) {
+		if(name == null || name.isBlank())
+			throw new IllegalArgumentException("Der Name darf nicht leer sein.");
+		
+		if(welcomePage == null)
+			throw new IllegalArgumentException("Geben Sie eine Eintrittsseite an.");
+		
+		if(welcomePage.getFilename() == null || welcomePage.getFilename().isBlank())
+			throw new IllegalArgumentException("Die Eintrittseite darf nicht leer sein.");
+		
+		this.name = name;
+		this.welcomePage = welcomePage.getFilename();
+		this.files = new ArrayList<DemonstrationFile>();
+	}
+	
 	public Demonstration() {
 		this.files = new ArrayList<DemonstrationFile>();
 	}
@@ -71,6 +86,15 @@ public class Demonstration {
 		files.add(file);
 		file.setDemonstration(this);
 	}
+	
+	public void removeFile(DemonstrationFile file) {
+		this.files.remove(file);
+	}
+	
+	public void removeAllFiles() {
+		for(DemonstrationFile file : new ArrayList<DemonstrationFile>(this.files))
+			this.removeFile(file);
+	}
 
 	public String getName() {
 		return name;
@@ -92,6 +116,16 @@ public class Demonstration {
 			throw new IllegalArgumentException("Die Eintrittseite darf nicht leer sein.");
 		
 		this.welcomePage = welcomePage;
+	}
+	
+	public void setWelcomePage(DemonstrationFile welcomePage) {
+		if(welcomePage == null)
+			throw new IllegalArgumentException("Geben Sie eine Eintrittsseite an.");
+		
+		if(welcomePage.getFilename() == null || welcomePage.getFilename().isBlank())
+			throw new IllegalArgumentException("Die Eintrittseite darf nicht leer sein.");
+		
+		this.welcomePage = welcomePage.getFilename();
 	}
 	
 	public List<DemonstrationFile> getFiles() {

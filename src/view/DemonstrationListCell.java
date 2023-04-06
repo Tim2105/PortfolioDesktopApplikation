@@ -2,10 +2,16 @@ package view;
 
 import entity.Demonstration;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.OverrunStyle;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import main.Main;
 import model.DBInterface;
@@ -42,15 +48,39 @@ public class DemonstrationListCell extends ListCell<Demonstration> {
 			if(index != -1)
 				url = url.substring(0, index);
 			
-			Hyperlink link = new Hyperlink("http://" + url + ":5173/demo/" + String.valueOf(item.id));
+			String finalUrl = url;
+			
+			HBox hbox = new HBox();
+			hbox.setAlignment(Pos.CENTER_LEFT);
+			hbox.prefWidthProperty().bind(this.widthProperty().subtract(16.0));
+			
+			Hyperlink link = new Hyperlink("/demo/" + String.valueOf(item.id));
 			link.setStyle("-fx-font-style: italic;");
-			link.prefWidthProperty().bind(this.widthProperty().subtract(16.0));
+			link.setPrefWidth(USE_COMPUTED_SIZE);
+			link.setMaxWidth(USE_COMPUTED_SIZE);
 			link.setTextOverrun(OverrunStyle.ELLIPSIS);
 			link.setOnAction(ev -> {
-				Main.getApplication().getHostServices().showDocument(link.getText());
+				Main.getApplication().getHostServices().showDocument("http://" + finalUrl + ":5173/demo/" + String.valueOf(item.id));
 			});
 			
-			vbox.getChildren().addAll(name, link);
+			Region region = new Region();
+			region.setPrefWidth(0.0);
+			
+			Button copyButton = new Button("Kopieren");
+			copyButton.setOnAction(ev -> {
+				Clipboard clipboard = Clipboard.getSystemClipboard();
+				
+				ClipboardContent content = new ClipboardContent();
+				content.putString("/demo/" + String.valueOf(item.id));
+				
+				clipboard.setContent(content);
+			});
+			
+			hbox.getChildren().addAll(link, region, copyButton);
+			
+			HBox.setHgrow(region, Priority.ALWAYS);
+			
+			vbox.getChildren().addAll(name, hbox);
 			this.setGraphic(vbox);
 		}
 	}

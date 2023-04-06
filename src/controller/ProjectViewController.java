@@ -20,7 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DBInterface;
 import view.DetailedProjectListCell;
-import view.EmptyListViewPlaceholder;
+import view.EmptyViewPlaceholder;
 
 public class ProjectViewController extends Controller implements Refreshable {
     
@@ -38,7 +38,7 @@ public class ProjectViewController extends Controller implements Refreshable {
 
     @FXML
     void initialize() {
-    	this.projectsListView.setPlaceholder(new EmptyListViewPlaceholder(
+    	this.projectsListView.setPlaceholder(new EmptyViewPlaceholder(
     						"Noch keine Projekte erstellt",
     						"Projekt hinzufügen",
     						ev -> {

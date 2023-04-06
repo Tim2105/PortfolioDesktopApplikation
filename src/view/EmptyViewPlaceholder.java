@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class EmptyListViewPlaceholder extends Parent {
+public class EmptyViewPlaceholder extends Parent {
 	
 	private VBox container;
 	
@@ -16,7 +16,7 @@ public class EmptyListViewPlaceholder extends Parent {
 	
 	private Button button;
 	
-	public EmptyListViewPlaceholder(String labelText, String buttonText) {
+	public EmptyViewPlaceholder(String labelText, String buttonText) {
 		this.container = new VBox();
 		this.container.setAlignment(Pos.CENTER);
 		this.container.setSpacing(5.0);
@@ -28,7 +28,7 @@ public class EmptyListViewPlaceholder extends Parent {
 		this.getChildren().add(this.container);
 	}
 	
-	public EmptyListViewPlaceholder(String labelText, String buttonText, EventHandler<ActionEvent> evHandler) {
+	public EmptyViewPlaceholder(String labelText, String buttonText, EventHandler<ActionEvent> evHandler) {
 		this(labelText, buttonText);
 		this.setOnAction(evHandler);
 	}
