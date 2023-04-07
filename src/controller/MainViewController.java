@@ -1,5 +1,6 @@
 package controller;
 
+import entity.Demonstration;
 import entity.Developer;
 import entity.Project;
 import javafx.fxml.FXML;
@@ -23,6 +24,9 @@ public class MainViewController extends Controller {
     
     @FXML
     private MenuItem newDeveloperMenuItem;
+    
+    @FXML
+    private MenuItem newDemonstrationMenuItem;
     
     @FXML
     private MenuItem newConnectionMenuItem;
@@ -172,6 +176,40 @@ public class MainViewController extends Controller {
     	}
     }
     
+    private void openDemonstrationEditView(Demonstration demo) {
+		try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DemonstrationEditView.fxml"));
+			Parent root = loader.load();
+			EditController<Demonstration> controller = loader.getController();
+			controller.setEntity(demo);
+			
+			Scene scene = new Scene(root);
+			
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(root.getScene().getWindow());
+			stage.setScene(scene);
+			
+			String stageTitle = "Demonstration bearbeiten - ";
+			
+			if(demo != null)
+				stageTitle += demo.getName();
+			else
+				stageTitle += "Neue Demonstration";
+			
+			stage.setTitle(stageTitle);
+			stage.showAndWait();
+			
+			this.refreshLists();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR,
+					"Ein unerwarteter Fehler ist aufgetreten:\n" + e.getMessage(),
+					ButtonType.OK);
+			alert.show();
+    	}
+	}
+    
     @FXML
     private void handleNewProjectMenuItemAction() {
     	this.openProjectEditView(null);
@@ -180,6 +218,11 @@ public class MainViewController extends Controller {
     @FXML
     private void handleNewDeveloperMenuItemAction() {
     	this.openDeveloperEditView(null);
+    }
+    
+    @FXML
+    private void handleNewDemonstrationMenuItemAction() {
+    	this.openDemonstrationEditView(null);
     }
     
     @FXML

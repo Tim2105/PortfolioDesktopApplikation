@@ -37,6 +37,7 @@
             <items>
               <MenuItem fx:id="newProjectMenuItem" mnemonicParsing="false" onAction="#handleNewProjectMenuItemAction" text="Projekt" />
                   <MenuItem fx:id="newDeveloperMenuItem" mnemonicParsing="false" onAction="#handleNewDeveloperMenuItemAction" text="Entwickler" />
+                  <MenuItem fx:id="newDemonstrationMenuItem" mnemonicParsing="false" onAction="#handleNewDemonstrationMenuItemAction" text="Demonstration" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Datenbank">
