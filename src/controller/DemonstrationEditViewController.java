@@ -331,6 +331,9 @@ public class DemonstrationEditViewController extends EditController<Demonstratio
 
     @FXML
     private void handleConfirmButtonAction() {
+    	if(this.fileTableView.getEditingCell() != null)
+    		this.fileTableView.edit(-1, null); // Editieren beenden
+    	
     	try {
     		if(this.entity == null) {
     			Demonstration d = new Demonstration(
