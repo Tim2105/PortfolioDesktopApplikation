@@ -88,7 +88,7 @@ public class DBConnectionViewController extends EditController<DBConnectionData>
     	
     	return "jdbc:firebirdsql://" +
     			hostname +
-    			"/C:/Users/timpl/Desktop/Informatikstudium/Sommersemester 2023/Projekt/Datenbank/DATABASE.FDB";
+    			"/projectDatabase";
     }
 
 	@Override

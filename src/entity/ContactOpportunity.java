@@ -40,14 +40,20 @@ public class ContactOpportunity {
 		this.platform = platform;
 		this.url = url;
 		
-		this.formatMailAndPhoneURL();
+		this.formatURL();
 	}
 	
-	private void formatMailAndPhoneURL() {
-		if(platform == Platform.Email && !this.url.startsWith("mailto:"))
-			this.url = "mailto:" + this.url;
-		else if(platform == Platform.Phone && !this.url.startsWith("Tel: "))
-			this.url = "Tel: " + this.url;
+	private void formatURL() {
+		if(platform == Platform.Email) {
+			if(!this.url.startsWith("mailto:"))
+				this.url = "mailto:" + this.url;
+		} else if(platform == Platform.Phone) {
+			if(!this.url.startsWith("Tel: "))
+				this.url = "Tel: " + this.url;
+		} else {
+			if(!(this.url.startsWith("http://") || this.url.startsWith("https://")))
+				this.url = "http://" + this.url;
+		}
 	}
 	
 	public ContactOpportunity() {
@@ -83,7 +89,7 @@ public class ContactOpportunity {
 		
 		this.platform = platform;
 		
-		this.formatMailAndPhoneURL();
+		this.formatURL();
 	}
 	
 	public String getURL() {
@@ -96,7 +102,7 @@ public class ContactOpportunity {
 		
 		this.url = url;
 		
-		this.formatMailAndPhoneURL();
+		this.formatURL();
 	}
 	
 	public Developer getDeveloper() {
