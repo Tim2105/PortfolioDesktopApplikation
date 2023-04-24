@@ -44,10 +44,6 @@ public class DemonstrationListCell extends ListCell<Demonstration> {
 			if(index != -1)
 				url = url.substring(0, index);
 			
-			index = url.lastIndexOf(":");
-			if(index != -1)
-				url = url.substring(0, index);
-			
 			String finalUrl = url;
 			
 			HBox hbox = new HBox();
@@ -60,7 +56,7 @@ public class DemonstrationListCell extends ListCell<Demonstration> {
 			link.setMaxWidth(USE_COMPUTED_SIZE);
 			link.setTextOverrun(OverrunStyle.ELLIPSIS);
 			link.setOnAction(ev -> {
-				Main.getApplication().getHostServices().showDocument("http://" + finalUrl + ":5173/demo/" + String.valueOf(item.id));
+				Main.getApplication().getHostServices().showDocument("http://" + finalUrl + "/demo/" + String.valueOf(item.id));
 			});
 			
 			Region region = new Region();
