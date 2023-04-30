@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import main.App;
 import model.DBConnectionData;
 import model.DBInterface;
 
@@ -27,7 +28,7 @@ public class DBConnectionViewController extends EditController<DBConnectionData>
 
     @FXML
     private Button confirmButton;
-
+    
     @FXML
     void handleCancelButtonAction() {
     	this.close();

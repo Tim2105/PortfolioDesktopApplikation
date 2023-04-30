@@ -8,7 +8,6 @@ module Projekt {
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires transitive javafx.graphics;
-	requires jakarta.xml.bind;
 	
 	opens controller to javafx.fxml;
 }

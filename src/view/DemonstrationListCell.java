@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import main.Main;
+import main.App;
 import model.DBInterface;
 
 public class DemonstrationListCell extends ListCell<Demonstration> {
@@ -56,7 +56,7 @@ public class DemonstrationListCell extends ListCell<Demonstration> {
 			link.setMaxWidth(USE_COMPUTED_SIZE);
 			link.setTextOverrun(OverrunStyle.ELLIPSIS);
 			link.setOnAction(ev -> {
-				Main.getApplication().getHostServices().showDocument("http://" + finalUrl + "/demo/" + String.valueOf(item.id));
+				App.getApplication().getHostServices().showDocument("http://" + finalUrl + "/demo/" + String.valueOf(item.id));
 			});
 			
 			Region region = new Region();

@@ -3,7 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import main.Main;
+import main.App;
 
 public class AboutViewController extends Controller {
 	
@@ -15,7 +15,7 @@ public class AboutViewController extends Controller {
 	
 	@FXML
 	private void handleUrlHyperlinkAction() {
-		Main.getApplication().getHostServices().showDocument(this.urlHyperlink.getText());
+		App.getApplication().getHostServices().showDocument(this.urlHyperlink.getText());
 	}
 	
 	@FXML
