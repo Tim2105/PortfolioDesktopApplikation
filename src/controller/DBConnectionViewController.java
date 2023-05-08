@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import main.App;
 import model.DBConnectionData;
 import model.DBInterface;
 

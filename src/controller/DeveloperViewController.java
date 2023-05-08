@@ -71,6 +71,8 @@ public class DeveloperViewController extends Controller implements Refreshable {
     			Alert warningDialog = new Alert(AlertType.WARNING,
     					"Möchten Sie den Entwickler wirklich löschen?\nDiese Aktion ist permanent!",
     					ButtonType.NO, ButtonType.YES);
+    			
+    			warningDialog.setResizable(true);
     			Optional<ButtonType> result = warningDialog.showAndWait();
     			
     			if(result.isPresent() && result.get().equals(ButtonType.YES))
@@ -179,6 +181,9 @@ public class DeveloperViewController extends Controller implements Refreshable {
     		Alert warningDialog = new Alert(AlertType.WARNING,
 					"Möchten Sie den Entwickler wirklich löschen?\nDiese Aktion ist permanent!",
 					ButtonType.NO, ButtonType.YES);
+    		
+    		warningDialog.setResizable(true);
+    		warningDialog.setHeight(warningDialog.getHeight() + 10.0);
 			Optional<ButtonType> result = warningDialog.showAndWait();
 			
 			if(result.isPresent() && result.get().equals(ButtonType.YES))
