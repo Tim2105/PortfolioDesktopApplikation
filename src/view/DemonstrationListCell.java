@@ -43,6 +43,11 @@ public class DemonstrationListCell extends ListCell<Demonstration> {
 			index = url.lastIndexOf(":");
 			if(index != -1)
 				url = url.substring(0, index);
+			else {
+				index = url.indexOf("/");
+				if(index != -1)
+					url = url.substring(0, index);
+			}
 			
 			String finalUrl = url;
 			
